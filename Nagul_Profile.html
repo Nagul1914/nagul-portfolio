@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nagul Meera Shaik | Data & Business Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap"/>
+<style>
+/* ─────────────── TOKENS ─────────────── */
+:root{
+  --accent:#63D2FF;
+  --accent2:#7BF5A0;
+  --accent3:#FF7B7B;
+  --accent-gold:#FFD166;
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
+  --radius:12px;
+  --radius-lg:20px;
+  --trans:.3s cubic-bezier(.4,0,.2,1);
+  --shadow-card:0 4px 32px rgba(0,0,0,.4);
+  --shadow-glow:0 0 40px rgba(99,210,255,.15);
+}
+[data-theme="dark"]{
+  --bg:#07090F;
+  --bg2:#0D1018;
+  --bg3:#131723;
+  --bg4:#1A1F2E;
+  --border:rgba(99,210,255,.1);
+  --border2:rgba(99,210,255,.06);
+  --text1:#EEF2FF;
+  --text2:#9BA4C0;
+  --text3:#5A6180;
+  --nav-bg:rgba(7,9,15,.85);
+  --card-bg:rgba(13,16,24,.9);
+}
+[data-theme="light"]{
+  --bg:#F5F7FF;
+  --bg2:#FFFFFF;
+  --bg3:#EDF0FA;
+  --bg4:#E2E7F5;
+  --border:rgba(63,120,200,.15);
+  --border2:rgba(63,120,200,.08);
+  --text1:#0D1117;
+  --text2:#3D4A6B;
+  --text3:#7A86A3;
+  --nav-bg:rgba(245,247,255,.88);
+  --card-bg:rgba(255,255,255,.95);
+  --shadow-card:0 4px 32px rgba(0,0,0,.1);
+  --shadow-glow:0 0 40px rgba(99,150,255,.1);
+}
+
+/* ─────────────── RESET ─────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--text1);font-family:var(--font-body);line-height:1.6;overflow-x:hidden;transition:background var(--trans),color var(--trans)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+ul{list-style:none}
+
+/* ─────────────── NOISE OVERLAY ─────────────── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.4;
+}
+
+/* ─────────────── NAV ─────────────── */
+#navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  backdrop-filter:blur(20px) saturate(180%);
+  background:var(--nav-bg);
+  border-bottom:1px solid var(--border);
+  transition:all var(--trans);
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;height:64px;
+}
+.nav-logo{
+  font-family:var(--font-head);font-size:1.25rem;font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-.02em;
+}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-link{
+  font-size:.875rem;font-weight:500;color:var(--text2);
+  padding:.5rem .85rem;border-radius:8px;
+  transition:all var(--trans);position:relative;letter-spacing:.01em;
+}
+.nav-link:hover,.nav-link.active{color:var(--text1);background:var(--bg4)}
+.nav-link.active::after{
+  content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;border-radius:50%;background:var(--accent);
+}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.theme-btn{
+  width:38px;height:38px;border-radius:10px;background:var(--bg4);
+  border:1px solid var(--border);color:var(--text2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1rem;transition:all var(--trans);
+}
+.theme-btn:hover{color:var(--text1);border-color:var(--accent);box-shadow:0 0 12px rgba(99,210,255,.2)}
+.nav-cta{
+  padding:.5rem 1.1rem;border-radius:9px;font-size:.875rem;font-weight:600;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#07090F;letter-spacing:.01em;transition:all var(--trans);
+  box-shadow:0 2px 16px rgba(99,210,255,.25);
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 24px rgba(99,210,255,.4)}
+.hamburger{display:none;flex-direction:column;gap:5px;width:38px;height:38px;align-items:center;justify-content:center;border-radius:10px;background:var(--bg4);border:1px solid var(--border)}
+.hamburger span{width:18px;height:2px;background:var(--text2);border-radius:2px;transition:all var(--trans)}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem;flex-direction:column;gap:.25rem}
+  .nav-links.open{display:flex}
+  .nav-cta{display:none}
+  .hamburger{display:flex}
+}
+
+/* ─────────────── PAGE SYSTEM ─────────────── */
+.page{display:none;min-height:100vh;padding-top:64px;animation:fadeUp .5s ease both}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ─────────────── HERO ─────────────── */
+.hero{
+  min-height:calc(100vh - 64px);display:flex;align-items:center;
+  padding:4rem 2rem;position:relative;overflow:hidden;
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px);
+  background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 40%,transparent 100%);
+}
+.hero-glow{
+  position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(99,210,255,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.4rem 1rem;border-radius:100px;
+  border:1px solid var(--border);background:var(--bg2);
+  font-size:.8rem;font-weight:500;color:var(--accent);
+  font-family:var(--font-mono);margin-bottom:1.5rem;
+  animation:fadeUp .6s ease .1s both;
+}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px var(--accent2)}
+.hero-name{
+  font-family:var(--font-head);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;
+  line-height:1;letter-spacing:-.04em;margin-bottom:.75rem;
+  animation:fadeUp .6s ease .2s both;
+}
+.hero-name span{
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--accent-gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-title{
+  font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--text2);font-weight:400;
+  margin-bottom:1.5rem;animation:fadeUp .6s ease .3s both;
+}
+.hero-title strong{color:var(--text1);font-weight:600}
+.hero-desc{
+  max-width:600px;color:var(--text2);font-size:1.05rem;line-height:1.75;
+  margin-bottom:2.5rem;animation:fadeUp .6s ease .4s both;
+}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;animation:fadeUp .6s ease .45s both}
+.pill{
+  padding:.35rem .85rem;border-radius:100px;font-size:.8rem;font-weight:500;
+  border:1px solid var(--border);color:var(--text2);background:var(--bg2);
+  font-family:var(--font-mono);transition:all var(--trans);
+}
+.pill:hover{border-color:var(--accent);color:var(--accent);background:rgba(99,210,255,.05)}
+.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;animation:fadeUp .6s ease .5s both}
+.btn-primary{
+  padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.95rem;font-weight:600;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#07090F;transition:all var(--trans);box-shadow:0 4px 20px rgba(99,210,255,.3);
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,210,255,.45)}
+.btn-secondary{
+  padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.95rem;font-weight:600;
+  border:1px solid var(--border);color:var(--text1);background:var(--bg2);
+  transition:all var(--trans);display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);background:rgba(99,210,255,.04)}
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;padding-top:2rem;
+  border-top:1px solid var(--border);animation:fadeUp .6s ease .6s both;
+}
+.hero-stat-num{font-family:var(--font-head);font-size:2.2rem;font-weight:800;color:var(--text1)}
+.hero-stat-num span{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-stat-label{font-size:.8rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem}
+
+/* ─────────────── SECTION COMMONS ─────────────── */
+.section{padding:5rem 2rem}
+.section-inner{max-width:1200px;margin:0 auto}
+.section-label{
+  font-family:var(--font-mono);font-size:.75rem;font-weight:500;
+  color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;
+}
+.section-label::before{content:'//'}
+.section-title{
+  font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:800;
+  letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;
+}
+.section-title .hi{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.section-sub{color:var(--text2);font-size:1.05rem;max-width:600px;margin-bottom:3rem;line-height:1.7}
+.divider{width:60px;height:3px;border-radius:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));margin-bottom:2rem}
+
+/* ─────────────── ABOUT ─────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+.about-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:2rem;backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
+}
+.about-card h3{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--text1)}
+.timeline{display:flex;flex-direction:column;gap:1.5rem}
+.tl-item{display:flex;gap:1rem;position:relative}
+.tl-item::before{content:'';position:absolute;left:15px;top:36px;bottom:-1.5rem;width:1px;background:var(--border);z-index:0}
+.tl-item:last-child::before{display:none}
+.tl-dot{
+  width:32px;height:32px;border-radius:50%;border:2px solid var(--accent);
+  background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;z-index:1;position:relative;
+}
+.tl-content h4{font-weight:600;font-size:.95rem;margin-bottom:.2rem}
+.tl-content .tl-company{color:var(--accent);font-size:.85rem;font-weight:500}
+.tl-content .tl-date{color:var(--text3);font-size:.8rem;font-family:var(--font-mono);margin-bottom:.5rem}
+.tl-content p{color:var(--text2);font-size:.875rem;line-height:1.6}
+.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+.tag{padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:500;background:var(--bg4);color:var(--text2);border:1px solid var(--border)}
+
+/* ─────────────── SKILLS ─────────────── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+.skill-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:1.75rem;backdrop-filter:blur(10px);transition:all var(--trans);
+}
+.skill-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow-glow)}
+.skill-card-icon{
+  width:44px;height:44px;border-radius:12px;margin-bottom:1rem;
+  background:rgba(99,210,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;
+}
+.skill-card h3{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:.35rem}
+.skill-card p{color:var(--text3);font-size:.8rem;margin-bottom:1.2rem;line-height:1.5}
+.skill-bars{display:flex;flex-direction:column;gap:.65rem}
+.skill-row{display:flex;flex-direction:column;gap:.3rem}
+.skill-row-top{display:flex;justify-content:space-between;align-items:center}
+.skill-name{font-size:.8rem;font-weight:500;color:var(--text2)}
+.skill-pct{font-size:.75rem;font-family:var(--font-mono);color:var(--text3)}
+.bar-track{height:5px;border-radius:100px;background:var(--bg4);overflow:hidden}
+.bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.cert-item{
+  padding:1rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);
+  display:flex;align-items:center;gap:.75rem;transition:all var(--trans);
+}
+.cert-item:hover{border-color:var(--accent-gold);box-shadow:0 0 16px rgba(255,209,102,.1)}
+.cert-ico{font-size:1.5rem}
+.cert-info h4{font-size:.85rem;font-weight:600;margin-bottom:.1rem}
+.cert-info p{font-size:.75rem;color:var(--text3)}
+
+/* ─────────────── PROJECTS ─────────────── */
+.projects-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.filter-btn{
+  padding:.5rem 1.1rem;border-radius:100px;font-size:.82rem;font-weight:500;
+  border:1px solid var(--border);color:var(--text2);background:var(--bg2);
+  transition:all var(--trans);cursor:pointer;
+}
+.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(99,210,255,.06)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
+@media(max-width:480px){.projects-grid{grid-template-columns:1fr}}
+.proj-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+  overflow:hidden;backdrop-filter:blur(10px);transition:all var(--trans);
+  display:flex;flex-direction:column;
+}
+.proj-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:var(--shadow-glow),var(--shadow-card)}
+.proj-header{
+  padding:1.5rem 1.5rem 1rem;
+  background:linear-gradient(135deg,var(--bg3),var(--bg4));
+  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+}
+.proj-header::after{
+  content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;
+  border-radius:50%;background:radial-gradient(circle,rgba(99,210,255,.08),transparent);
+}
+.proj-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+.proj-type-badge{
+  padding:.25rem .65rem;border-radius:6px;font-size:.72rem;font-weight:600;
+  font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;
+}
+.badge-da{background:rgba(99,210,255,.12);color:var(--accent);border:1px solid rgba(99,210,255,.2)}
+.badge-ba{background:rgba(123,245,160,.12);color:var(--accent2);border:1px solid rgba(123,245,160,.2)}
+.badge-wow{background:rgba(255,209,102,.12);color:var(--accent-gold);border:1px solid rgba(255,209,102,.2)}
+.proj-num{font-family:var(--font-mono);font-size:.75rem;color:var(--text3)}
+.proj-title{font-family:var(--font-head);font-size:1.15rem;font-weight:700;line-height:1.2;margin-bottom:.4rem}
+.proj-subtitle{font-size:.85rem;color:var(--text2);line-height:1.4}
+.proj-body{padding:1.25rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:1rem}
+.proj-impact{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;
+  padding:.75rem;border-radius:var(--radius);background:var(--bg4);border:1px solid var(--border2);
+}
+.impact-item{text-align:center}
+.impact-num{font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--accent);line-height:1}
+.impact-label{font-size:.68rem;color:var(--text3);margin-top:.2rem;line-height:1.3}
+.proj-desc{font-size:.875rem;color:var(--text2);line-height:1.65}
+.proj-stack{display:flex;flex-wrap:wrap;gap:.35rem}
+.stack-tag{
+  padding:.25rem .6rem;border-radius:5px;font-size:.72rem;font-weight:500;
+  background:var(--bg4);color:var(--text3);border:1px solid var(--border);
+  font-family:var(--font-mono);
+}
+.proj-actions{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:.75rem}
+.proj-btn{
+  flex:1;padding:.55rem;border-radius:9px;font-size:.82rem;font-weight:600;
+  text-align:center;transition:all var(--trans);display:flex;align-items:center;justify-content:center;gap:.4rem;
+}
+.proj-btn-primary{
+  background:rgba(99,210,255,.1);color:var(--accent);border:1px solid rgba(99,210,255,.2);
+}
+.proj-btn-primary:hover{background:var(--accent);color:#07090F}
+.proj-btn-secondary{
+  background:var(--bg4);color:var(--text2);border:1px solid var(--border);
+}
+.proj-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.proj-expand{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.proj-expand.open{max-height:500px}
+.proj-expand-inner{padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
+.expand-section h4{font-size:.8rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.expand-section ul{display:flex;flex-direction:column;gap:.35rem}
+.expand-section li{font-size:.85rem;color:var(--text2);display:flex;gap:.5rem;align-items:flex-start}
+.expand-section li::before{content:'▸';color:var(--accent);flex-shrink:0;margin-top:.05rem}
+.wow-ribbon{
+  position:absolute;top:12px;right:-28px;background:linear-gradient(135deg,var(--accent-gold),#FF9F43);
+  color:#07090F;font-size:.65rem;font-weight:700;padding:.3rem 2rem;
+  transform:rotate(35deg);letter-spacing:.08em;
+}
+
+/* ─────────────── CONTACT ─────────────── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+.contact-card{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:2rem;backdrop-filter:blur(10px);
+}
+.contact-links{display:flex;flex-direction:column;gap:1rem}
+.contact-link-item{
+  display:flex;align-items:center;gap:1rem;padding:1rem;
+  border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);
+  transition:all var(--trans);
+}
+.contact-link-item:hover{border-color:var(--accent);background:rgba(99,210,255,.04);transform:translateX(4px)}
+.contact-link-icon{
+  width:42px;height:42px;border-radius:10px;background:rgba(99,210,255,.1);
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;
+}
+.contact-link-info h4{font-size:.9rem;font-weight:600;margin-bottom:.1rem}
+.contact-link-info p{font-size:.8rem;color:var(--text3)}
+.resume-download{
+  display:flex;align-items:center;gap:1rem;padding:1.5rem;
+  border-radius:var(--radius-lg);border:2px dashed rgba(99,210,255,.3);
+  background:rgba(99,210,255,.04);transition:all var(--trans);
+  margin-top:1.5rem;
+}
+.resume-download:hover{border-color:var(--accent);background:rgba(99,210,255,.08);transform:translateY(-2px)}
+.resume-download h3{font-family:var(--font-head);font-size:1rem;font-weight:700}
+.resume-download p{font-size:.8rem;color:var(--text2)}
+.form-group{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem}
+.form-label{font-size:.85rem;font-weight:600;color:var(--text2)}
+.form-input,.form-textarea{
+  padding:.75rem 1rem;border-radius:var(--radius);background:var(--bg4);
+  border:1px solid var(--border);color:var(--text1);font-family:var(--font-body);
+  font-size:.9rem;transition:all var(--trans);resize:none;
+}
+.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,210,255,.1)}
+.form-textarea{min-height:120px}
+.form-submit{
+  width:100%;padding:.85rem;border-radius:var(--radius);font-size:.95rem;font-weight:600;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07090F;
+  transition:all var(--trans);box-shadow:0 4px 16px rgba(99,210,255,.25);
+}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,210,255,.4)}
+
+/* ─────────────── FOOTER ─────────────── */
+footer{
+  padding:2rem;text-align:center;border-top:1px solid var(--border);
+  color:var(--text3);font-size:.82rem;
+}
+footer span{color:var(--accent)}
+
+/* ─────────────── SCROLL ANIMATIONS ─────────────── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ─────────────── MOBILE NAV CLOSE ─────────────── */
+@media(max-width:768px){
+  .hero-stats{flex-wrap:wrap;gap:1.5rem}
+  .impact-num{font-size:.9rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">NMS<span style="color:var(--accent2)">.</span></div>
+    <div class="nav-links" id="navLinks">
+      <a class="nav-link active" href="#home" onclick="navigate('home')">Home</a>
+      <a class="nav-link" href="#about" onclick="navigate('about')">About</a>
+      <a class="nav-link" href="#skills" onclick="navigate('skills')">Skills</a>
+      <a class="nav-link" href="#da-projects" onclick="navigate('da-projects')">DA Projects</a>
+      <a class="nav-link" href="#ba-projects" onclick="navigate('ba-projects')">BA Projects</a>
+      <a class="nav-link" href="#contact" onclick="navigate('contact')">Contact</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme" id="themeBtn">🌙</button>
+      <a class="nav-cta" href="#contact" onclick="navigate('contact')">Hire Me →</a>
+      <button class="hamburger" onclick="toggleMobileNav()" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">🟢 Open to new opportunities · Jersey City, NJ</div>
+      <h1 class="hero-name">Nagul Meera<br/><span>Shaik</span></h1>
+      <p class="hero-title"><strong>Data Analyst & Business Analyst</strong> · 3+ Years · Healthcare · Finance · SaaS</p>
+      <p class="hero-desc">
+        Turning raw data into business intelligence that decision-makers actually use. Expert in SQL, Python, Power BI, and end-to-end analytics pipelines — from enterprise claims data at Centene to AI-powered forecasting systems.
+      </p>
+      <div class="hero-pills">
+        <span class="pill">SQL ↗ Advanced</span>
+        <span class="pill">Python · Pandas</span>
+        <span class="pill">Power BI · DAX</span>
+        <span class="pill">Tableau</span>
+        <span class="pill">HEDIS Reporting</span>
+        <span class="pill">Machine Learning</span>
+        <span class="pill">M.S. Data Science</span>
+      </div>
+      <div class="hero-btns">
+        <a class="btn-primary" href="#da-projects" onclick="navigate('da-projects')">
+          <span>↓</span> View Projects
+        </a>
+        <a class="btn-secondary" href="#contact" onclick="navigate('contact')">
+          <span>✉</span> Get In Touch
+        </a>
+        <a class="btn-secondary" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank">
+          <span>in</span> LinkedIn
+        </a>
+        <a class="btn-secondary" href="https://github.com/Nagul1914" target="_blank">
+          <span>⌥</span> GitHub
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num"><span>3</span>+</div>
+          <div class="hero-stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="hero-stat-num"><span>8</span></div>
+          <div class="hero-stat-label">Case Studies</div>
+        </div>
+        <div>
+          <div class="hero-stat-num"><span>5</span>+</div>
+          <div class="hero-stat-label">Core Tools</div>
+        </div>
+        <div>
+          <div class="hero-stat-num"><span>2</span></div>
+          <div class="hero-stat-label">Certifications</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<div class="page" id="page-about">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Who I am</div>
+      <h2 class="section-title">About <span class="hi">Me</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">A data professional who bridges the gap between raw datasets and strategic business outcomes. I thrive in fast-moving, regulated, and data-dense environments.</p>
+
+      <div class="about-grid">
+        <!-- LEFT COLUMN -->
+        <div>
+          <div class="about-card reveal" style="margin-bottom:1.5rem">
+            <h3>Professional Summary</h3>
+            <p style="color:var(--text2);font-size:.9rem;line-height:1.75">
+              Data Analyst with <strong style="color:var(--accent)">3+ years of experience</strong> delivering data-driven insights across enterprise and regulated environments. Expert in advanced SQL (CTEs, window functions, complex joins), Power BI dashboard development, DAX-based KPI reporting, and Python (Pandas).
+              <br/><br/>
+              Proven collaborator with cross-functional and international stakeholders, transforming complex data into actionable insights with high data accuracy and reliability. Specialized in healthcare claims analytics (Medicaid & Medicare), HEDIS reporting, and financial market analysis.
+            </p>
+            <div class="about-tags" style="margin-top:1.25rem">
+              <span class="tag">Healthcare Analytics</span>
+              <span class="tag">Financial Analysis</span>
+              <span class="tag">KPI Design</span>
+              <span class="tag">Process Automation</span>
+              <span class="tag">Root Cause Analysis</span>
+              <span class="tag">HEDIS Reporting</span>
+              <span class="tag">Executive Reporting</span>
+              <span class="tag">Stakeholder Mgmt</span>
+            </div>
+          </div>
+          <div class="about-card reveal">
+            <h3>🎓 Education</h3>
+            <div style="display:flex;align-items:flex-start;gap:1rem;margin-top:.75rem">
+              <div style="width:44px;height:44px;border-radius:12px;background:rgba(99,210,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0">🏛</div>
+              <div>
+                <div style="font-weight:700;font-size:1rem">Master's in Data Science</div>
+                <div style="color:var(--accent);font-size:.85rem;font-weight:500">Pace University, New York, NY</div>
+                <div style="color:var(--text3);font-size:.8rem;font-family:var(--font-mono)">Sep 2022 – Apr 2024</div>
+                <p style="color:var(--text2);font-size:.85rem;margin-top:.5rem">Advanced coursework in machine learning, statistical modeling, data engineering, NLP, and business intelligence systems.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div>
+          <div class="about-card reveal">
+            <h3>💼 Work Experience</h3>
+            <div class="timeline" style="margin-top:1rem">
+              <div class="tl-item">
+                <div class="tl-dot">🏥</div>
+                <div class="tl-content">
+                  <h4>Data Analyst</h4>
+                  <div class="tl-company">Centene Corporation · USA</div>
+                  <div class="tl-date">Jan 2024 – Present · Full-time</div>
+                  <p>Analyzing medical and pharmacy claims across Medicaid/Medicare populations (100K+ members). Developed advanced SQL pipelines, Power BI dashboards tracking cost trends, utilization rates, and provider performance. Supported HEDIS quality reporting and automated recurring reports via Python — reducing reporting turnaround by 40%.</p>
+                  <div class="about-tags" style="margin-top:.75rem">
+                    <span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Python</span><span class="tag">HEDIS</span><span class="tag">Medicaid/Medicare</span>
+                  </div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot">🌐</div>
+                <div class="tl-content">
+                  <h4>Jr. Data Analyst</h4>
+                  <div class="tl-company">Genpact · Hyderabad, India</div>
+                  <div class="tl-date">Aug 2021 – Jul 2022 · Full-time</div>
+                  <p>Extracted and analyzed data from enterprise systems using SQL. Developed Power BI & Excel dashboards to track KPIs and trends. Automated recurring reports, collaborated with business stakeholders, and supported senior analysts in process improvement initiatives.</p>
+                  <div class="about-tags" style="margin-top:.75rem">
+                    <span class="tag">SQL</span><span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">Process Improvement</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ SKILLS ═══════════════ -->
+<div class="page" id="page-skills">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Technical Proficiency</div>
+      <h2 class="section-title">Skills & <span class="hi">Tools</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">A modern analytics stack built over 3+ years of real enterprise, healthcare, and financial environments.</p>
+
+      <div class="skills-grid">
+        <!-- Card 1: Data Querying -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🗄</div>
+          <h3>Data Querying & Engineering</h3>
+          <p>Advanced database manipulation for enterprise warehouses and analytical pipelines</p>
+          <div class="skill-bars">
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">SQL (CTEs · Window Fn · Joins)</span><span class="skill-pct">95%</span></div><div class="bar-track"><div class="bar-fill" data-pct="95"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Python · Pandas</span><span class="skill-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-pct="82"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">dbt (Data Build Tool)</span><span class="skill-pct">68%</span></div><div class="bar-track"><div class="bar-fill" data-pct="68"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Card 2: BI & Visualization -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon" style="background:rgba(123,245,160,.1)">📊</div>
+          <h3>Business Intelligence & Visualization</h3>
+          <p>Dashboard development, KPI reporting, and executive-level data storytelling</p>
+          <div class="skill-bars">
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Power BI + DAX</span><span class="skill-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Tableau Desktop</span><span class="skill-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-pct="85"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Excel (Pivot · Lookups)</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Card 3: Analytics -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon" style="background:rgba(255,123,123,.1)">📈</div>
+          <h3>Analytics & Statistical Modeling</h3>
+          <p>From KPI design to ML-powered forecasting and predictive insights</p>
+          <div class="skill-bars">
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">KPI Design & Performance Monitoring</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Trend & Variance Analysis</span><span class="skill-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Scikit-learn / ML Models</span><span class="skill-pct">72%</span></div><div class="bar-track"><div class="bar-fill" data-pct="72"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Card 4: Domain -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon" style="background:rgba(255,209,102,.1)">🏥</div>
+          <h3>Domain & Business Knowledge</h3>
+          <p>Regulated reporting environments and cross-industry analytical expertise</p>
+          <div class="skill-bars">
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Healthcare Claims (Medicaid/Medicare)</span><span class="skill-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">HEDIS Reporting</span><span class="skill-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-pct="85"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Financial Market Analytics</span><span class="skill-pct">78%</span></div><div class="bar-track"><div class="bar-fill" data-pct="78"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Card 5: Data Mgmt -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon" style="background:rgba(99,210,255,.1)">🔧</div>
+          <h3>Data Management & Quality</h3>
+          <p>End-to-end data reliability from ingestion to audit-ready reporting</p>
+          <div class="skill-bars">
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Data Cleaning & Transformation</span><span class="skill-pct">93%</span></div><div class="bar-track"><div class="bar-fill" data-pct="93"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Data Validation & Reconciliation</span><span class="skill-pct">91%</span></div><div class="bar-track"><div class="bar-fill" data-pct="91"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Reporting Automation (SQL+Python)</span><span class="skill-pct">86%</span></div><div class="bar-track"><div class="bar-fill" data-pct="86"></div></div></div>
+          </div>
+        </div>
+
+        <!-- Card 6: Soft -->
+        <div class="skill-card reveal">
+          <div class="skill-card-icon" style="background:rgba(123,245,160,.1)">🤝</div>
+          <h3>Collaboration & Business Acumen</h3>
+          <p>Translating business questions into data solutions and back again</p>
+          <div class="skill-bars">
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Stakeholder Communication</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Requirements Translation</span><span class="skill-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-pct="88"></div></div></div>
+            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Executive Reporting & Storytelling</span><span class="skill-pct">87%</span></div><div class="bar-track"><div class="bar-fill" data-pct="87"></div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div style="margin-top:3rem">
+        <div class="section-label" style="margin-bottom:1rem">Verified Credentials</div>
+        <div class="cert-grid reveal">
+          <div class="cert-item">
+            <div class="cert-ico">📊</div>
+            <div class="cert-info">
+              <h4>Microsoft Power BI</h4>
+              <p>Analyzing & Visualizing Data</p>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico">📉</div>
+            <div class="cert-info">
+              <h4>Tableau Desktop Professional</h4>
+              <p>Certified Professional Exam</p>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico">🎓</div>
+            <div class="cert-info">
+              <h4>M.S. Data Science</h4>
+              <p>Pace University · New York</p>
+            </div>
+          </div>
+          <div class="cert-item">
+            <div class="cert-ico">🐍</div>
+            <div class="cert-info">
+              <h4>Python · Pandas · scikit-learn</h4>
+              <p>Applied ML & Data Analysis</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ DA PROJECTS ═══════════════ -->
+<div class="page" id="page-da-projects">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Data Analyst Portfolio</div>
+      <h2 class="section-title">Data Analysis <span class="hi">Projects</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">6 end-to-end case studies spanning financial markets, insurance analytics, healthcare intelligence, and AI-powered forecasting — each with dashboards, business recommendations, and documented methodology.</p>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT DA-1: S&P 500 -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-da">Data Analyst</span>
+              <span class="proj-num">DA · 01</span>
+            </div>
+            <div class="proj-title">S&P 500 Market Intelligence Dashboard</div>
+            <div class="proj-subtitle">Finance-focused market analysis with automated trend detection</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">500+</div><div class="impact-label">Stocks Analyzed</div></div>
+              <div class="impact-item"><div class="impact-num">40%</div><div class="impact-label">Reporting Time Saved</div></div>
+              <div class="impact-item"><div class="impact-num">5yr</div><div class="impact-label">Historical Depth</div></div>
+            </div>
+            <p class="proj-desc">Analyzed daily S&P 500 market data to uncover price trends, sector rotation patterns, and volatility clustering. Built automated reporting pipelines that pull live market data, compute moving averages (SMA 50/200), and surface anomalies — all visualized in an interactive Power BI dashboard with drill-down by sector, time period, and individual ticker.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">Pandas</span><span class="stack-tag">yfinance API</span>
+              <span class="stack-tag">SQL</span><span class="stack-tag">Power BI</span><span class="stack-tag">DAX</span>
+              <span class="stack-tag">NumPy</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-da1">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Key Findings</h4><ul>
+                <li>Identified 3-week sector rotation signal between Energy and Technology ETFs preceding 8% market moves</li>
+                <li>Volatility spikes (VIX > 25) correlated with 94% accuracy to drawdown periods exceeding 5%</li>
+                <li>Golden cross (SMA 50 crossing SMA 200) produced 72% win-rate signals over a 5-year backtest</li>
+              </ul></div>
+              <div class="expand-section"><h4>Business Impact</h4><ul>
+                <li>Reduced daily market briefing preparation from 3 hours to 45 minutes via automated Python pipeline</li>
+                <li>Dashboard adopted by 4 stakeholders for weekly portfolio review meetings</li>
+                <li>Enabled proactive risk flagging instead of reactive reporting</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-da1',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT DA-2: Customer Churn -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-da">Data Analyst</span>
+              <span class="proj-num">DA · 02</span>
+            </div>
+            <div class="proj-title">Customer Churn Prediction — Travelers Insurance</div>
+            <div class="proj-subtitle">ML-powered retention intelligence with executive dashboards</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">81%</div><div class="impact-label">Model Accuracy</div></div>
+              <div class="impact-item"><div class="impact-num">10%</div><div class="impact-label">Churn Reduction</div></div>
+              <div class="impact-item"><div class="impact-num">21%</div><div class="impact-label">Revenue Uplift</div></div>
+            </div>
+            <p class="proj-desc">Built a full churn prediction pipeline on Travelers Insurance policyholder data — from raw feature engineering to a production-ready Logistic Regression + Random Forest ensemble (81% accuracy, AUC 0.69). Identified top churn drivers (policy tenure, claim history, premium changes) and delivered cost–benefit analysis that informed a targeted retention campaign worth an estimated 21% revenue uplift.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">scikit-learn</span><span class="stack-tag">Pandas</span>
+              <span class="stack-tag">SQL</span><span class="stack-tag">Power BI</span><span class="stack-tag">SHAP</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-da2">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Methodology</h4><ul>
+                <li>Processed 150K+ policyholder records — handled class imbalance via SMOTE oversampling</li>
+                <li>Feature engineering: policy tenure buckets, claim frequency index, engagement score composite</li>
+                <li>SHAP values explained model decisions to non-technical stakeholders in exec presentation</li>
+              </ul></div>
+              <div class="expand-section"><h4>Business Recommendations</h4><ul>
+                <li>Target high-risk policyholders (score ≥ 0.7) with personalized retention offers 90 days before renewal</li>
+                <li>Claim processing delays > 14 days are the single strongest churn predictor — fix ops first</li>
+                <li>Pilot program on 5,000 customers modeled to recover $2.1M in premium revenue annually</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-da2',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT DA-3: Healthcare (from Centene experience) -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-da">Data Analyst</span>
+              <span class="proj-num">DA · 03</span>
+            </div>
+            <div class="proj-title">Healthcare Cost & Utilization Intelligence — Medicaid/Medicare</div>
+            <div class="proj-subtitle">Enterprise claims analytics with HEDIS gap-in-care analysis</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">100K+</div><div class="impact-label">Claims Processed</div></div>
+              <div class="impact-item"><div class="impact-num">$2.3M</div><div class="impact-label">Savings Identified</div></div>
+              <div class="impact-item"><div class="impact-num">15%</div><div class="impact-label">HEDIS Score Lift</div></div>
+            </div>
+            <p class="proj-desc">Designed and deployed a comprehensive analytics solution on Centene-scale Medicaid/Medicare claims data. Used advanced SQL (CTEs, window functions, multi-table joins across eligibility, medical, pharmacy, and provider tables) to detect utilization anomalies, cost trend outliers, and care gaps. Power BI dashboards provided real-time visibility into member health outcomes and provider performance.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">SQL Advanced</span><span class="stack-tag">CTEs</span><span class="stack-tag">Window Fn</span>
+              <span class="stack-tag">Power BI</span><span class="stack-tag">Python</span><span class="stack-tag">HEDIS</span><span class="stack-tag">CMS Guidelines</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-da3">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Technical Highlights</h4><ul>
+                <li>Built 12-table star-schema SQL model joining eligibility, claims, pharmacy, and provider datasets</li>
+                <li>LAG/LEAD window functions to compute member admission readmission rates within 30-day windows</li>
+                <li>Python-automated daily data validation checks reduced data quality incidents by 65%</li>
+              </ul></div>
+              <div class="expand-section"><h4>Clinical & Business Outcomes</h4><ul>
+                <li>Identified $2.3M in duplicated billing across 3 regional providers — escalated to compliance</li>
+                <li>HEDIS gap closure rate improved 15% after targeted outreach based on model-flagged members</li>
+                <li>Automated weekly executive report replaced 8 hours of manual analyst work per cycle</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-da3',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT DA-4: Retail Demand Forecasting (WOW) -->
+        <div class="proj-card reveal" style="position:relative;overflow:hidden">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-wow">⚡ WOW</span>
+              <span class="proj-num">DA · 04</span>
+            </div>
+            <div class="proj-title">AI-Powered Retail Demand Forecasting Engine</div>
+            <div class="proj-subtitle">Prophet + XGBoost ensemble with Streamlit interactive dashboard</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">94.2%</div><div class="impact-label">Forecast Accuracy</div></div>
+              <div class="impact-item"><div class="impact-num">$4.7M</div><div class="impact-label">Waste Reduction</div></div>
+              <div class="impact-item"><div class="impact-num">12wk</div><div class="impact-label">Forecast Horizon</div></div>
+            </div>
+            <p class="proj-desc">Built an end-to-end ML demand forecasting system simulating a Walmart-scale retail scenario (50+ product categories, 500 store locations, 3 years of sales history). Used a Prophet + XGBoost ensemble with holiday effects, promotions, and macroeconomic indicators as external regressors. Live Streamlit dashboard allows supply chain teams to run scenario simulations in real-time.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">Prophet</span><span class="stack-tag">XGBoost</span>
+              <span class="stack-tag">Streamlit</span><span class="stack-tag">Pandas</span><span class="stack-tag">SQL</span>
+              <span class="stack-tag">Power BI</span><span class="stack-tag">Plotly</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-da4">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Architecture</h4><ul>
+                <li>Data ingestion: Walmart-style POS synthetic data (Kaggle M5 competition format, 1M+ rows)</li>
+                <li>Feature engineering: lag features, rolling averages, event calendars, price elasticity coefficients</li>
+                <li>Ensemble: Prophet (trend/seasonality) + XGBoost (residuals + exogenous vars) → MAPE 5.8%</li>
+                <li>Streamlit app: SKU-level drill-down, confidence intervals, "what-if" promo simulator</li>
+              </ul></div>
+              <div class="expand-section"><h4>Business Impact</h4><ul>
+                <li>Model identified 23 high-velocity SKUs being systematically under-ordered — fix worth $800K/qtr</li>
+                <li>Seasonal perishable waste modeled at $4.7M annually based on inventory optimization recommendations</li>
+                <li>Dashboard accepted as supply chain planning tool in simulated executive sign-off scenario</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-da4',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT DA-5: Fraud Detection (WOW) -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-wow">⚡ WOW</span>
+              <span class="proj-num">DA · 05</span>
+            </div>
+            <div class="proj-title">Real-Time Financial Fraud Detection System</div>
+            <div class="proj-subtitle">Isolation Forest + Random Forest with live Power BI alert dashboard</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">97.3%</div><div class="impact-label">Precision</div></div>
+              <div class="impact-item"><div class="impact-num">$18M</div><div class="impact-label">Fraud Prevented</div></div>
+              <div class="impact-item"><div class="impact-num">500K+</div><div class="impact-label">Transactions</div></div>
+            </div>
+            <p class="proj-desc">Designed a two-stage fraud detection pipeline on a 500K synthetic credit card transaction dataset. Stage 1 uses Isolation Forest for unsupervised anomaly pre-screening; Stage 2 uses a calibrated Random Forest classifier trained on flagged transactions. Power BI streaming dashboard surfaces high-risk alerts in near real-time, with drill-down by merchant category, geography, and customer profile.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">Isolation Forest</span><span class="stack-tag">Random Forest</span>
+              <span class="stack-tag">SQL</span><span class="stack-tag">Power BI Streaming</span><span class="stack-tag">SHAP</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-da5">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Technical Design</h4><ul>
+                <li>Dataset: IEEE-CIS Fraud Detection (Kaggle) — 590K transactions, severe class imbalance (3.5% fraud)</li>
+                <li>SMOTE + cost-sensitive learning to handle imbalance without losing recall on minority class</li>
+                <li>Feature importance: transaction velocity, device fingerprint mismatch, and billing-shipping distance top 3 predictors</li>
+                <li>Model served via a lightweight Flask API for real-time scoring simulation</li>
+              </ul></div>
+              <div class="expand-section"><h4>Financial Impact</h4><ul>
+                <li>Backtest on 60-day transaction history: $18M in fraudulent transactions would have been flagged</li>
+                <li>False positive rate held below 0.8% — critical to avoid blocking legitimate customers</li>
+                <li>Alert system design reduces human review queue by 60% by auto-resolving low-risk flags</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-da5',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT DA-6: Social Sentiment (WOW) -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-wow">⚡ WOW</span>
+              <span class="proj-num">DA · 06</span>
+            </div>
+            <div class="proj-title">Social Sentiment → Revenue Intelligence Engine</div>
+            <div class="proj-subtitle">NLP sentiment leading indicator correlating to sales performance</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">3wk</div><div class="impact-label">Lead Indicator</div></div>
+              <div class="impact-item"><div class="impact-num">82%</div><div class="impact-label">Direction Accuracy</div></div>
+              <div class="impact-item"><div class="impact-num">50K+</div><div class="impact-label">Posts Analyzed</div></div>
+            </div>
+            <p class="proj-desc">Built an NLP pipeline that scrapes Reddit/Twitter brand mentions, applies VADER + transformer-based sentiment scoring, and correlates weekly sentiment shifts to product revenue movements. Discovered a consistent 3-week leading indicator: negative sentiment spikes predicted revenue decline with 82% directional accuracy — enabling marketing teams to respond proactively before impact hits the income statement.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">VADER NLP</span><span class="stack-tag">TextBlob</span>
+              <span class="stack-tag">Pandas</span><span class="stack-tag">Tableau</span><span class="stack-tag">SQL</span><span class="stack-tag">Reddit API</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-da6">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Pipeline Architecture</h4><ul>
+                <li>Data collection: Reddit PRAW API + Twitter Academic API — 50K brand-mention posts per company</li>
+                <li>Dual-model sentiment: VADER for speed + FinBERT (finance-tuned BERT) for accuracy on financial terms</li>
+                <li>Time-lagged correlation analysis using cross-correlation function (CCF) to find 3-week lag signal</li>
+              </ul></div>
+              <div class="expand-section"><h4>Marketing & Business Value</h4><ul>
+                <li>Framework applied to 5 consumer brands — 4 of 5 showed statistically significant (p < 0.05) lag correlation</li>
+                <li>Marketing response playbook: 3 intervention tiers triggered at different sentiment thresholds</li>
+                <li>Tableau storyboard presented to simulated CMO audience — recommended $200K early-warning monitoring budget</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-da6',this)">↓ Details</button>
+          </div>
+        </div>
+
+      </div><!-- end grid -->
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ BA PROJECTS ═══════════════ -->
+<div class="page" id="page-ba-projects">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Business Analyst Portfolio</div>
+      <h2 class="section-title">Business Analysis <span class="hi">Projects</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">6 strategic case studies combining process analysis, stakeholder management, requirements engineering, ROI modeling, and data-driven business transformation.</p>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT BA-1: Digital Banking Transformation -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-ba">Business Analyst</span>
+              <span class="proj-num">BA · 01</span>
+            </div>
+            <div class="proj-title">Digital Banking Transformation — Legacy System Migration</div>
+            <div class="proj-subtitle">BRD, process mapping, stakeholder analysis & ROI modeling</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">$1.2M</div><div class="impact-label">Annual Savings</div></div>
+              <div class="impact-item"><div class="impact-num">45%</div><div class="impact-label">Process Efficiency</div></div>
+              <div class="impact-item"><div class="impact-num">18mo</div><div class="impact-label">Payback Period</div></div>
+            </div>
+            <p class="proj-desc">Led business analysis for a regional bank's migration from a 15-year-old core banking platform to a cloud-native system. Produced comprehensive BRD (60-page), AS-IS/TO-BE process maps (22 workflows), stakeholder impact matrix, and phased implementation roadmap. Quantified ROI across 3 business units and secured C-suite sign-off through executive summary dashboard.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Excel</span><span class="stack-tag">Power BI</span><span class="stack-tag">JIRA</span>
+              <span class="stack-tag">Confluence</span><span class="stack-tag">Visio</span><span class="stack-tag">SQL</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-ba1">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>BA Deliverables</h4><ul>
+                <li>Business Requirements Document (BRD): 60-page functional and non-functional requirements</li>
+                <li>Swim-lane process maps for 22 banking workflows — loan origination, account opening, payments</li>
+                <li>RACI matrix and stakeholder communication plan across 6 business units and IT department</li>
+                <li>Gap analysis matrix: 47 capability gaps identified, prioritized by business impact and effort</li>
+              </ul></div>
+              <div class="expand-section"><h4>Business Case Outcome</h4><ul>
+                <li>5-year NPV of migration: $4.2M based on conservative cost avoidance model</li>
+                <li>Process automation of 12 manual workflows → 45% reduction in processing time</li>
+                <li>Compliance risk exposure reduced by eliminating 3 end-of-life system vulnerabilities</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-ba1',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT BA-2: SaaS Pricing Optimization -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-ba">Business Analyst</span>
+              <span class="proj-num">BA · 02</span>
+            </div>
+            <div class="proj-title">SaaS Pricing Model Optimization — B2B Platform</div>
+            <div class="proj-subtitle">Cohort analysis, pricing tier modeling & revenue simulation</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">23%</div><div class="impact-label">MRR Uplift</div></div>
+              <div class="impact-item"><div class="impact-num">4</div><div class="impact-label">Tier Scenarios</div></div>
+              <div class="impact-item"><div class="impact-num">18mo</div><div class="impact-label">Cohort Window</div></div>
+            </div>
+            <p class="proj-desc">Performed a full pricing analysis for a B2B SaaS platform with 3,500 customers. Conducted cohort-based LTV analysis, feature adoption heatmaps, and price elasticity modeling across customer segments. Built a revenue simulation model in Python + Excel that allowed leadership to test 4 pricing tier structures and visualize MRR trajectory under each scenario before committing to a pricing change.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">SQL</span><span class="stack-tag">Excel</span>
+              <span class="stack-tag">Power BI</span><span class="stack-tag">Pandas</span><span class="stack-tag">Cohort Analysis</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-ba2">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Analytical Approach</h4><ul>
+                <li>Cohort analysis: 18 monthly cohorts — tracked expansion MRR, churn, and NRR by acquisition channel</li>
+                <li>Price elasticity estimated via natural experiment: A/B test on 500-customer pilot</li>
+                <li>Feature adoption matrix correlated to premium tier upgrade probability (85% accuracy)</li>
+              </ul></div>
+              <div class="expand-section"><h4>Strategic Recommendations</h4><ul>
+                <li>Recommended 3-tier structure (Starter/Growth/Enterprise) over flat pricing — validated by willingness-to-pay survey</li>
+                <li>Freemium-to-paid conversion opportunity: 340 accounts showing Enterprise-tier behavior on Starter plan</li>
+                <li>Projected 23% MRR increase in Year 1, reaching breakeven on pricing change investment in 4 months</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-ba2',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT BA-3: Supply Chain -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-ba">Business Analyst</span>
+              <span class="proj-num">BA · 03</span>
+            </div>
+            <div class="proj-title">Supply Chain Resilience Analysis — Post-COVID Recovery</div>
+            <div class="proj-subtitle">Scenario modeling, vendor risk scoring & disruption quantification</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">87</div><div class="impact-label">Vendors Scored</div></div>
+              <div class="impact-item"><div class="impact-num">3</div><div class="impact-label">Risk Scenarios</div></div>
+              <div class="impact-item"><div class="impact-num">32%</div><div class="impact-label">Lead Time Reduced</div></div>
+            </div>
+            <p class="proj-desc">Developed a vendor risk intelligence model for a mid-market manufacturer recovering from COVID supply chain disruption. Built a weighted vendor risk scorecard (87 suppliers) across 6 dimensions: financial health, geographic concentration, lead time variance, quality compliance, dependency risk, and ESG footprint. Ran Monte Carlo simulations for 3 disruption scenarios to quantify revenue exposure.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">Monte Carlo</span><span class="stack-tag">SQL</span>
+              <span class="stack-tag">Power BI</span><span class="stack-tag">Excel</span><span class="stack-tag">Risk Modeling</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-ba3">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Risk Framework</h4><ul>
+                <li>6-dimension vendor scorecard: financial, geographic, lead time, quality, dependency, ESG (1-100 scale)</li>
+                <li>Monte Carlo simulation (10,000 iterations) to quantify revenue-at-risk under 3 disruption scenarios</li>
+                <li>Geographic heatmap: 62% of critical components sourced from single-region vendors — key vulnerability</li>
+              </ul></div>
+              <div class="expand-section"><h4>Outcomes & Recommendations</h4><ul>
+                <li>Identified 14 "critical single-source" vendors accounting for $47M in annual procurement exposure</li>
+                <li>Dual-sourcing strategy for top-5 critical components modeled to reduce lead time risk by 32%</li>
+                <li>Executive scorecard dashboard now used in quarterly board risk reviews</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-ba3',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT BA-4: CLV Segmentation -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-ba">Business Analyst</span>
+              <span class="proj-num">BA · 04</span>
+            </div>
+            <div class="proj-title">Customer Lifetime Value Segmentation — E-Commerce</div>
+            <div class="proj-subtitle">RFM analysis, CLV prediction & marketing ROI optimization</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">34%</div><div class="impact-label">Marketing ROI</div></div>
+              <div class="impact-item"><div class="impact-num">5</div><div class="impact-label">CLV Segments</div></div>
+              <div class="impact-item"><div class="impact-num">200K+</div><div class="impact-label">Customers</div></div>
+            </div>
+            <p class="proj-desc">Implemented a full RFM (Recency, Frequency, Monetary) segmentation model on a 200K+ customer e-commerce dataset. Combined RFM with a predictive CLV model (BG/NBD + Gamma-Gamma) to assign 12-month revenue forecasts to each customer. The resulting 5-tier segmentation strategy — each with tailored engagement recommendations — modeled a 34% improvement in marketing ROI by shifting budget from low-CLV to high-CLV acquisition channels.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">lifetimes lib</span><span class="stack-tag">SQL</span>
+              <span class="stack-tag">Power BI</span><span class="stack-tag">RFM Analysis</span><span class="stack-tag">CLV Modeling</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-ba4">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Modeling Approach</h4><ul>
+                <li>RFM scoring: recency deciles + frequency quintiles + monetary percentiles → 125-cell matrix collapsed to 5 tiers</li>
+                <li>BG/NBD model for purchase probability + Gamma-Gamma for spend prediction → 12mo CLV per customer</li>
+                <li>K-means validation confirmed 5 natural segments; silhouette score 0.64 (strong separation)</li>
+              </ul></div>
+              <div class="expand-section"><h4>Marketing Recommendations</h4><ul>
+                <li>"Champions" segment (8% of customers, 41% of revenue): VIP loyalty program with exclusive access</li>
+                <li>"At-Risk High Value": win-back campaign with 20% discount modeled at 3.2x ROI vs. acquisition spend</li>
+                <li>Channel reallocation: shift $180K from paid search (low CLV acquisition) to email (5x CLV differential)</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-ba4',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT BA-5: ESG Sustainability (WOW) -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-wow">⚡ WOW</span>
+              <span class="proj-num">BA · 05</span>
+            </div>
+            <div class="proj-title">ESG Sustainability Scorecard & Regulatory Compliance Dashboard</div>
+            <div class="proj-subtitle">SEC climate disclosure readiness with Power BI compliance tracking</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">3</div><div class="impact-label">ESG Pillars</div></div>
+              <div class="impact-item"><div class="impact-num">40+</div><div class="impact-label">KPIs Tracked</div></div>
+              <div class="impact-item"><div class="impact-num">SEC</div><div class="impact-label">Disclosure Ready</div></div>
+            </div>
+            <p class="proj-desc">Designed a comprehensive ESG intelligence framework for a Fortune 500 manufacturing firm preparing for SEC climate disclosure requirements (2024). Built a data aggregation pipeline pulling Scope 1/2/3 emissions, water usage, DEI metrics, governance scores, and regulatory filings into a unified Power BI dashboard. Gap analysis identified 8 compliance risks before the mandatory reporting deadline.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">SQL</span><span class="stack-tag">Power BI</span>
+              <span class="stack-tag">Excel</span><span class="stack-tag">GRI Standards</span><span class="stack-tag">SASB Framework</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-ba5">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Framework Design</h4><ul>
+                <li>Aligned to GRI Standards + SASB sector-specific metrics + TCFD climate risk disclosure framework</li>
+                <li>Scope 1/2/3 emissions data pipeline from 6 operational systems → unified emissions ledger</li>
+                <li>Real-time compliance gap tracker: 40 mandatory KPIs with RAG (red/amber/green) status indicators</li>
+              </ul></div>
+              <div class="expand-section"><h4>Regulatory & Strategic Outcomes</h4><ul>
+                <li>8 material compliance gaps identified: 3 critical (Scope 3 data completeness, water stress disclosures)</li>
+                <li>Carbon reduction roadmap built: 3 scenarios (BAU, moderate action, aggressive) with NPV of each</li>
+                <li>Board-level ESG presentation accepted as template for annual sustainability report</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-ba5',this)">↓ Details</button>
+          </div>
+        </div>
+
+        <!-- PROJECT BA-6: AI Automation ROI (WOW) -->
+        <div class="proj-card reveal">
+          <div class="proj-header">
+            <div class="proj-meta">
+              <span class="proj-type-badge badge-wow">⚡ WOW</span>
+              <span class="proj-num">BA · 06</span>
+            </div>
+            <div class="proj-title">AI Automation ROI Analysis — Intelligent Process Automation</div>
+            <div class="proj-subtitle">Process mining, bot performance simulation & $3.4M value identification</div>
+          </div>
+          <div class="proj-body">
+            <div class="proj-impact">
+              <div class="impact-item"><div class="impact-num">$3.4M</div><div class="impact-label">Value Identified</div></div>
+              <div class="impact-item"><div class="impact-num">12</div><div class="impact-label">Processes Mapped</div></div>
+              <div class="impact-item"><div class="impact-num">68%</div><div class="impact-label">Manual Hours Saved</div></div>
+            </div>
+            <p class="proj-desc">Conducted a full-scale Intelligent Process Automation (IPA) opportunity assessment for a mid-market insurance company. Used process mining techniques to analyze 12 high-volume business processes (claims intake, policy renewal, billing reconciliation), scored each on automation feasibility, built ROI models for 3 implementation waves, and created an AI adoption roadmap with vendor selection scorecard comparing UiPath, Automation Anywhere, and Microsoft Power Automate.</p>
+            <div class="proj-stack">
+              <span class="stack-tag">Python</span><span class="stack-tag">SQL</span><span class="stack-tag">Power BI</span>
+              <span class="stack-tag">Excel</span><span class="stack-tag">Process Mining</span><span class="stack-tag">ROI Modeling</span>
+            </div>
+          </div>
+          <div class="proj-expand" id="exp-ba6">
+            <div class="proj-expand-inner">
+              <div class="expand-section"><h4>Process Assessment Methodology</h4><ul>
+                <li>12 processes scored on 5-dimension feasibility matrix: volume, rule-based, digital input, exception rate, value</li>
+                <li>Process mining on event log data (100K+ transactions) to identify actual vs. ideal workflow deviation</li>
+                <li>3 automation waves defined: Quick Wins (0-6mo), Strategic (6-18mo), Transformational (18mo+)</li>
+              </ul></div>
+              <div class="expand-section"><h4>Business Case & Adoption</h4><ul>
+                <li>Wave 1 (4 processes): 14-month payback, $980K Year-1 savings, 2.3 FTE redeployment opportunity</li>
+                <li>Claims intake automation alone: 68% reduction in manual processing time → 4.2 days → 1.1 days SLA</li>
+                <li>Vendor recommendation: Microsoft Power Automate (best fit for existing M365 infrastructure)</li>
+              </ul></div>
+            </div>
+          </div>
+          <div class="proj-actions">
+            <a class="proj-btn proj-btn-primary" href="https://github.com/Nagul1914" target="_blank">⌥ GitHub</a>
+            <button class="proj-btn proj-btn-secondary" onclick="toggleExpand('exp-ba6',this)">↓ Details</button>
+          </div>
+        </div>
+
+      </div><!-- end grid -->
+    </div>
+  </section>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="page" id="page-contact">
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">Let's Connect</div>
+      <h2 class="section-title">Get In <span class="hi">Touch</span></h2>
+      <div class="divider"></div>
+      <p class="section-sub">Open to Data Analyst and Business Analyst roles in Finance, Healthcare, SaaS, Retail, and Logistics. Based in Jersey City, NJ — open to remote and hybrid.</p>
+
+      <div class="contact-grid">
+        <!-- Links -->
+        <div>
+          <div class="contact-card reveal">
+            <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem">Connect & Profiles</h3>
+            <div class="contact-links">
+              <a class="contact-link-item" href="mailto:nagul4768@gmail.com">
+                <div class="contact-link-icon">✉</div>
+                <div class="contact-link-info">
+                  <h4>Email</h4>
+                  <p>nagul4768@gmail.com</p>
+                </div>
+              </a>
+              <a class="contact-link-item" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank">
+                <div class="contact-link-icon" style="background:rgba(10,102,194,.15)">in</div>
+                <div class="contact-link-info">
+                  <h4>LinkedIn</h4>
+                  <p>linkedin.com/in/nagulshaik-dataanalyst</p>
+                </div>
+              </a>
+              <a class="contact-link-item" href="https://github.com/Nagul1914" target="_blank">
+                <div class="contact-link-icon">⌥</div>
+                <div class="contact-link-info">
+                  <h4>GitHub</h4>
+                  <p>github.com/Nagul1914</p>
+                </div>
+              </a>
+              <div class="contact-link-item" style="cursor:default">
+                <div class="contact-link-icon">📍</div>
+                <div class="contact-link-info">
+                  <h4>Location</h4>
+                  <p>Jersey City, NJ · Open to Remote/Hybrid</p>
+                </div>
+              </div>
+            </div>
+            <a class="resume-download" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank">
+              <div style="font-size:2rem">📄</div>
+              <div>
+                <h3>Download Resume</h3>
+                <p>Nagul Shaik · Data & Business Analyst · 2024</p>
+              </div>
+              <div style="margin-left:auto;color:var(--accent);font-size:1.3rem">↓</div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <div class="contact-card reveal">
+            <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem">Send a Message</h3>
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input class="form-input" type="text" placeholder="Jane Smith, Hiring Manager"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input class="form-input" type="email" placeholder="jane@company.com"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company & Role</label>
+              <input class="form-input" type="text" placeholder="Acme Corp · Senior Data Analyst"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message</label>
+              <textarea class="form-textarea" placeholder="Hi Nagul, we'd love to discuss a Data Analyst role at..."></textarea>
+            </div>
+            <button class="form-submit" onclick="handleFormSubmit(this)">Send Message →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Availability Banner -->
+      <div class="reveal" style="margin-top:2.5rem;padding:1.5rem 2rem;border-radius:var(--radius-lg);border:1px solid rgba(123,245,160,.2);background:rgba(123,245,160,.04);display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
+        <div style="width:12px;height:12px;border-radius:50%;background:var(--accent2);box-shadow:0 0 12px var(--accent2);flex-shrink:0;animation:pulse 2s infinite"></div>
+        <div>
+          <div style="font-weight:700;font-size:1rem">Actively seeking new opportunities</div>
+          <div style="color:var(--text2);font-size:.875rem">Available for Data Analyst · Business Analyst · Analytics Engineer roles · Mid-level to Senior</div>
+        </div>
+        <a class="btn-primary" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank" style="margin-left:auto">View LinkedIn →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER (shown on all pages conceptually, actually bottom of each page) -->
+<footer id="site-footer" style="display:none">
+  <p>Designed & built with precision · <span>Nagul Meera Shaik</span> · Jersey City, NJ · 2024</p>
+  <p style="margin-top:.35rem">Data Analyst · Business Analyst · M.S. Data Science, Pace University</p>
+</footer>
+
+<style>
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 12px var(--accent2)}50%{opacity:.6;box-shadow:0 0 20px var(--accent2)}}
+</style>
+
+<script>
+// ─────── ROUTER ───────
+const PAGES = ['home','about','skills','da-projects','ba-projects','contact'];
+let currentPage = 'home';
+
+function navigate(page, pushState = true) {
+  if (!PAGES.includes(page)) page = 'home';
+  
+  // Hide all pages
+  PAGES.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.classList.remove('active');
+  });
+  
+  // Show target
+  const target = document.getElementById('page-' + page);
+  if (target) { target.classList.add('active'); window.scrollTo(0,0); }
+  
+  // Update nav
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + page) l.classList.add('active');
+  });
+  
+  // Update hash
+  if (pushState) history.pushState(null, '', '#' + page);
+  currentPage = page;
+  
+  // Show footer on all pages except home
+  const footer = document.getElementById('site-footer');
+  if(footer) footer.style.display = page !== 'home' ? 'block' : 'none';
+  
+  // Close mobile nav
+  document.getElementById('navLinks').classList.remove('open');
+  
+  // Trigger animations
+  setTimeout(triggerReveal, 100);
+  if (page === 'skills') setTimeout(animateBars, 300);
+}
+
+// Handle hash on load
+window.addEventListener('load', () => {
+  const hash = window.location.hash.replace('#','') || 'home';
+  navigate(hash, false);
+});
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#','') || 'home';
+  navigate(hash, false);
+});
+
+// ─────── THEME ───────
+let isDark = true;
+function toggleTheme() {
+  isDark = !isDark;
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+}
+
+// ─────── MOBILE NAV ───────
+function toggleMobileNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ─────── EXPAND/COLLAPSE ───────
+function toggleExpand(id, btn) {
+  const el = document.getElementById(id);
+  const isOpen = el.classList.contains('open');
+  el.classList.toggle('open');
+  btn.textContent = isOpen ? '↓ Details' : '↑ Collapse';
+}
+
+// ─────── SCROLL REVEAL ───────
+function triggerReveal() {
+  document.querySelectorAll('.page.active .reveal').forEach((el, i) => {
+    setTimeout(() => { el.classList.add('visible'); }, i * 60);
+  });
+}
+
+// ─────── SKILL BARS ───────
+function animateBars() {
+  document.querySelectorAll('.page.active .bar-fill').forEach(bar => {
+    bar.style.width = bar.dataset.pct + '%';
+  });
+}
+
+// ─────── FORM ───────
+function handleFormSubmit(btn) {
+  btn.textContent = '✓ Message Sent! I\'ll respond within 24hrs';
+  btn.style.background = 'linear-gradient(135deg,var(--accent2),#2ECC71)';
+  setTimeout(() => {
+    btn.textContent = 'Send Message →';
+    btn.style.background = '';
+  }, 4000);
+}
+
+// ─────── NAVBAR SCROLL ───────
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 20) nav.style.boxShadow = '0 4px 30px rgba(0,0,0,.3)';
+  else nav.style.boxShadow = '';
+});
+
+// Initial trigger
+setTimeout(triggerReveal, 200);
+</script>
+</body>
+</html>
