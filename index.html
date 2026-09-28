@@ -1,694 +1,108 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nagul Shaik | Quantitative Analyst & Financial Modeler</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=JetBrains+Mono:wght@400;500;600&display=swap"/>
-<style>
-/* ─────────────── TOKENS ─────────────── */
-:root{
-  --accent:#63D2FF;
-  --accent2:#7BF5A0;
-  --accent3:#FF7B7B;
-  --accent-gold:#FFD166;
-  --font-head:'Bricolage Grotesque',sans-serif;
-  --font-body:'DM Sans',sans-serif;
-  --font-mono:'JetBrains Mono',monospace;
-  --radius:12px;
-  --radius-lg:20px;
-  --trans:.3s cubic-bezier(.4,0,.2,1);
-  --shadow-card:0 4px 32px rgba(0,0,0,.4);
-  --shadow-glow:0 0 40px rgba(99,210,255,.15);
-}
-[data-theme="dark"]{
-  --bg:#07090F;
-  --bg2:#0D1018;
-  --bg3:#131723;
-  --bg4:#1A1F2E;
-  --border:rgba(99,210,255,.1);
-  --border2:rgba(99,210,255,.06);
-  --text1:#EEF2FF;
-  --text2:#9BA4C0;
-  --text3:#5A6180;
-  --nav-bg:rgba(7,9,15,.85);
-  --card-bg:rgba(13,16,24,.9);
-}
-[data-theme="light"]{
-  --bg:#F5F7FF;
-  --bg2:#FFFFFF;
-  --bg3:#EDF0FA;
-  --bg4:#E2E7F5;
-  --border:rgba(63,120,200,.15);
-  --border2:rgba(63,120,200,.08);
-  --text1:#0D1117;
-  --text2:#3D4A6B;
-  --text3:#7A86A3;
-  --nav-bg:rgba(245,247,255,.88);
-  --card-bg:rgba(255,255,255,.95);
-  --shadow-card:0 4px 32px rgba(0,0,0,.1);
-  --shadow-glow:0 0 40px rgba(99,150,255,.1);
-}
-
-/* ─────────────── RESET ─────────────── */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
-body{background:var(--bg);color:var(--text1);font-family:var(--font-body);line-height:1.6;overflow-x:hidden;transition:background var(--trans),color var(--trans)}
-a{color:inherit;text-decoration:none}
-img{max-width:100%;display:block}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
-ul{list-style:none}
-
-/* ─────────────── NOISE OVERLAY ─────────────── */
-body::before{
-  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:.4;
-}
-
-/* ─────────────── NAV ─────────────── */
-#navbar{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  backdrop-filter:blur(20px) saturate(180%);
-  background:var(--nav-bg);
-  border-bottom:1px solid var(--border);
-  transition:all var(--trans);
-}
-.nav-inner{
-  max-width:1200px;margin:0 auto;padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between;height:64px;
-}
-.nav-logo{
-  font-family:var(--font-head);font-size:1.25rem;font-weight:700;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:-.02em;
-}
-.nav-links{display:flex;align-items:center;gap:.25rem}
-.nav-link{
-  font-size:.875rem;font-weight:500;color:var(--text2);
-  padding:.5rem .85rem;border-radius:8px;
-  transition:all var(--trans);position:relative;letter-spacing:.01em;
-}
-.nav-link:hover,.nav-link.active{color:var(--text1);background:var(--bg4)}
-.nav-link.active::after{
-  content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
-  width:4px;height:4px;border-radius:50%;background:var(--accent);
-}
-.nav-right{display:flex;align-items:center;gap:.75rem}
-.theme-btn{
-  width:38px;height:38px;border-radius:10px;background:var(--bg4);
-  border:1px solid var(--border);color:var(--text2);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;transition:all var(--trans);
-}
-.theme-btn:hover{color:var(--text1);border-color:var(--accent);box-shadow:0 0 12px rgba(99,210,255,.2)}
-.nav-cta{
-  padding:.5rem 1.1rem;border-radius:9px;font-size:.875rem;font-weight:600;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#07090F;letter-spacing:.01em;transition:all var(--trans);
-  box-shadow:0 2px 16px rgba(99,210,255,.25);
-}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 24px rgba(99,210,255,.4)}
-.hamburger{display:none;flex-direction:column;gap:5px;width:38px;height:38px;align-items:center;justify-content:center;border-radius:10px;background:var(--bg4);border:1px solid var(--border)}
-.hamburger span{width:18px;height:2px;background:var(--text2);border-radius:2px;transition:all var(--trans)}
-@media(max-width:768px){
-  .nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:var(--bg2);border-bottom:1px solid var(--border);padding:1rem;flex-direction:column;gap:.25rem}
-  .nav-links.open{display:flex}
-  .nav-cta{display:none}
-  .hamburger{display:flex}
-}
-
-/* ─────────────── PAGE SYSTEM ─────────────── */
-.page{display:none;min-height:100vh;padding-top:64px;animation:fadeUp .5s ease both}
-.page.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-
-/* ─────────────── HERO ─────────────── */
-.hero{
-  min-height:calc(100vh - 64px);display:flex;align-items:center;
-  padding:4rem 2rem;position:relative;overflow:hidden;
-}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(var(--border2) 1px,transparent 1px),linear-gradient(90deg,var(--border2) 1px,transparent 1px);
-  background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,#000 40%,transparent 100%);
-}
-.hero-glow{
-  position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(99,210,255,.08) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.4rem 1rem;border-radius:100px;
-  border:1px solid var(--border);background:var(--bg2);
-  font-size:.8rem;font-weight:500;color:var(--accent);
-  font-family:var(--font-mono);margin-bottom:1.5rem;
-  animation:fadeUp .6s ease .1s both;
-}
-.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 8px var(--accent2)}
-.hero-name{
-  font-family:var(--font-head);font-size:clamp(2.8rem,7vw,5.5rem);font-weight:800;
-  line-height:1;letter-spacing:-.04em;margin-bottom:.75rem;
-  animation:fadeUp .6s ease .2s both;
-}
-.hero-name span{
-  background:linear-gradient(135deg,var(--accent) 0%,var(--accent2) 60%,var(--accent-gold) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-title{
-  font-size:clamp(1.1rem,2.5vw,1.4rem);color:var(--text2);font-weight:400;
-  margin-bottom:1.5rem;animation:fadeUp .6s ease .3s both;
-}
-.hero-title strong{color:var(--text1);font-weight:600}
-.hero-desc{
-  max-width:600px;color:var(--text2);font-size:1.05rem;line-height:1.75;
-  margin-bottom:2.5rem;animation:fadeUp .6s ease .4s both;
-}
-.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem;animation:fadeUp .6s ease .45s both}
-.pill{
-  padding:.35rem .85rem;border-radius:100px;font-size:.8rem;font-weight:500;
-  border:1px solid var(--border);color:var(--text2);background:var(--bg2);
-  font-family:var(--font-mono);transition:all var(--trans);
-}
-.pill:hover{border-color:var(--accent);color:var(--accent);background:rgba(99,210,255,.05)}
-.hero-btns{display:flex;flex-wrap:wrap;gap:1rem;animation:fadeUp .6s ease .5s both}
-.btn-primary{
-  padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.95rem;font-weight:600;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  color:#07090F;transition:all var(--trans);box-shadow:0 4px 20px rgba(99,210,255,.3);
-  display:inline-flex;align-items:center;gap:.5rem;
-}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(99,210,255,.45)}
-.btn-secondary{
-  padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.95rem;font-weight:600;
-  border:1px solid var(--border);color:var(--text1);background:var(--bg2);
-  transition:all var(--trans);display:inline-flex;align-items:center;gap:.5rem;
-}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent);background:rgba(99,210,255,.04)}
-.hero-stats{
-  display:flex;gap:3rem;margin-top:4rem;padding-top:2rem;
-  border-top:1px solid var(--border);animation:fadeUp .6s ease .6s both;
-}
-.hero-stat-num{font-family:var(--font-head);font-size:2.2rem;font-weight:800;color:var(--text1)}
-.hero-stat-num span{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.hero-stat-label{font-size:.8rem;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-top:.15rem}
-
-/* ─────────────── SECTION COMMONS ─────────────── */
-.section{padding:5rem 2rem}
-.section-inner{max-width:1200px;margin:0 auto}
-.section-label{
-  font-family:var(--font-mono);font-size:.75rem;font-weight:500;
-  color:var(--accent);letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem;
-}
-.section-label::before{content:'//'}
-.section-title{
-  font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:800;
-  letter-spacing:-.03em;line-height:1.1;margin-bottom:1rem;
-}
-.section-title .hi{
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.section-sub{color:var(--text2);font-size:1.05rem;max-width:600px;margin-bottom:3rem;line-height:1.7}
-.divider{width:60px;height:3px;border-radius:2px;background:linear-gradient(135deg,var(--accent),var(--accent2));margin-bottom:2rem}
-
-/* ─────────────── ABOUT ─────────────── */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
-.about-card{
-  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:2rem;backdrop-filter:blur(10px);box-shadow:var(--shadow-card);
-}
-.about-card h3{font-family:var(--font-head);font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--text1)}
-.timeline{display:flex;flex-direction:column;gap:1.5rem}
-.tl-item{display:flex;gap:1rem;position:relative}
-.tl-item::before{content:'';position:absolute;left:15px;top:36px;bottom:-1.5rem;width:1px;background:var(--border);z-index:0}
-.tl-item:last-child::before{display:none}
-.tl-dot{
-  width:32px;height:32px;border-radius:50%;border:2px solid var(--accent);
-  background:var(--bg3);flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;z-index:1;position:relative;
-}
-.tl-content h4{font-weight:600;font-size:.95rem;margin-bottom:.2rem}
-.tl-content .tl-company{color:var(--accent);font-size:.85rem;font-weight:500}
-.tl-content .tl-date{color:var(--text3);font-size:.8rem;font-family:var(--font-mono);margin-bottom:.5rem}
-.tl-content p{color:var(--text2);font-size:.875rem;line-height:1.6}
-.about-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
-.tag{padding:.3rem .7rem;border-radius:6px;font-size:.78rem;font-weight:500;background:var(--bg4);color:var(--text2);border:1px solid var(--border)}
-
-/* ─────────────── SKILLS ─────────────── */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
-.skill-card{
-  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:1.75rem;backdrop-filter:blur(10px);transition:all var(--trans);
-}
-.skill-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:var(--shadow-glow)}
-.skill-card-icon{
-  width:44px;height:44px;border-radius:12px;margin-bottom:1rem;
-  background:rgba(99,210,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;
-}
-.skill-card h3{font-family:var(--font-head);font-size:1rem;font-weight:700;margin-bottom:.35rem}
-.skill-card p{color:var(--text3);font-size:.8rem;margin-bottom:1.2rem;line-height:1.5}
-.skill-bars{display:flex;flex-direction:column;gap:.65rem}
-.skill-row{display:flex;flex-direction:column;gap:.3rem}
-.skill-row-top{display:flex;justify-content:space-between;align-items:center}
-.skill-name{font-size:.8rem;font-weight:500;color:var(--text2)}
-.skill-pct{font-size:.75rem;font-family:var(--font-mono);color:var(--text3)}
-.bar-track{height:5px;border-radius:100px;background:var(--bg4);overflow:hidden}
-.bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
-.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
-.cert-item{
-  padding:1rem;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);
-  display:flex;align-items:center;gap:.75rem;transition:all var(--trans);
-}
-.cert-item:hover{border-color:var(--accent-gold);box-shadow:0 0 16px rgba(255,209,102,.1)}
-.cert-ico{font-size:1.5rem}
-.cert-info h4{font-size:.85rem;font-weight:600;margin-bottom:.1rem}
-.cert-info p{font-size:.75rem;color:var(--text3)}
-
-/* ─────────────── PROJECTS ─────────────── */
-.projects-filter{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
-.filter-btn{
-  padding:.5rem 1.1rem;border-radius:100px;font-size:.82rem;font-weight:500;
-  border:1px solid var(--border);color:var(--text2);background:var(--bg2);
-  transition:all var(--trans);cursor:pointer;
-}
-.filter-btn.active,.filter-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(99,210,255,.06)}
-.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:1.5rem}
-@media(max-width:480px){.projects-grid{grid-template-columns:1fr}}
-.proj-card{
-  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
-  overflow:hidden;backdrop-filter:blur(10px);transition:all var(--trans);
-  display:flex;flex-direction:column;
-}
-.proj-card:hover{border-color:var(--accent);transform:translateY(-5px);box-shadow:var(--shadow-glow),var(--shadow-card)}
-.proj-header{
-  padding:1.5rem 1.5rem 1rem;
-  background:linear-gradient(135deg,var(--bg3),var(--bg4));
-  border-bottom:1px solid var(--border);position:relative;overflow:hidden;
-}
-.proj-header::after{
-  content:'';position:absolute;right:-20px;top:-20px;width:100px;height:100px;
-  border-radius:50%;background:radial-gradient(circle,rgba(99,210,255,.08),transparent);
-}
-.proj-meta{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
-.proj-type-badge{
-  padding:.25rem .65rem;border-radius:6px;font-size:.72rem;font-weight:600;
-  font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;
-}
-.badge-da{background:rgba(99,210,255,.12);color:var(--accent);border:1px solid rgba(99,210,255,.2)}
-.badge-ba{background:rgba(123,245,160,.12);color:var(--accent2);border:1px solid rgba(123,245,160,.2)}
-.badge-wow{background:rgba(255,209,102,.12);color:var(--accent-gold);border:1px solid rgba(255,209,102,.2)}
-.proj-num{font-family:var(--font-mono);font-size:.75rem;color:var(--text3)}
-.proj-title{font-family:var(--font-head);font-size:1.15rem;font-weight:700;line-height:1.2;margin-bottom:.4rem}
-.proj-subtitle{font-size:.85rem;color:var(--text2);line-height:1.4}
-.proj-body{padding:1.25rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:1rem}
-.proj-impact{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;
-  padding:.75rem;border-radius:var(--radius);background:var(--bg4);border:1px solid var(--border2);
-}
-.impact-item{text-align:center}
-.impact-num{font-family:var(--font-head);font-size:1.1rem;font-weight:800;color:var(--accent);line-height:1}
-.impact-label{font-size:.68rem;color:var(--text3);margin-top:.2rem;line-height:1.3}
-.proj-desc{font-size:.875rem;color:var(--text2);line-height:1.65}
-.proj-stack{display:flex;flex-wrap:wrap;gap:.35rem}
-.stack-tag{
-  padding:.25rem .6rem;border-radius:5px;font-size:.72rem;font-weight:500;
-  background:var(--bg4);color:var(--text3);border:1px solid var(--border);
-  font-family:var(--font-mono);
-}
-.proj-actions{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:.75rem}
-.proj-btn{
-  flex:1;padding:.55rem;border-radius:9px;font-size:.82rem;font-weight:600;
-  text-align:center;transition:all var(--trans);display:flex;align-items:center;justify-content:center;gap:.4rem;
-}
-.proj-btn-primary{
-  background:rgba(99,210,255,.1);color:var(--accent);border:1px solid rgba(99,210,255,.2);
-}
-.proj-btn-primary:hover{background:var(--accent);color:#07090F}
-.proj-btn-secondary{
-  background:var(--bg4);color:var(--text2);border:1px solid var(--border);
-}
-.proj-btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
-.proj-expand{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.proj-expand.open{max-height:500px}
-.proj-expand-inner{padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.75rem}
-.expand-section h4{font-size:.8rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
-.expand-section ul{display:flex;flex-direction:column;gap:.35rem}
-.expand-section li{font-size:.85rem;color:var(--text2);display:flex;gap:.5rem;align-items:flex-start}
-.expand-section li::before{content:'▸';color:var(--accent);flex-shrink:0;margin-top:.05rem}
-.wow-ribbon{
-  position:absolute;top:12px;right:-28px;background:linear-gradient(135deg,var(--accent-gold),#FF9F43);
-  color:#07090F;font-size:.65rem;font-weight:700;padding:.3rem 2rem;
-  transform:rotate(35deg);letter-spacing:.08em;
-}
-
-/* ─────────────── CONTACT ─────────────── */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
-.contact-card{
-  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
-  padding:2rem;backdrop-filter:blur(10px);
-}
-.contact-links{display:flex;flex-direction:column;gap:1rem}
-.contact-link-item{
-  display:flex;align-items:center;gap:1rem;padding:1rem;
-  border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);
-  transition:all var(--trans);
-}
-.contact-link-item:hover{border-color:var(--accent);background:rgba(99,210,255,.04);transform:translateX(4px)}
-.contact-link-icon{
-  width:42px;height:42px;border-radius:10px;background:rgba(99,210,255,.1);
-  display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;
-}
-.contact-link-info h4{font-size:.9rem;font-weight:600;margin-bottom:.1rem}
-.contact-link-info p{font-size:.8rem;color:var(--text3)}
-.resume-download{
-  display:flex;align-items:center;gap:1rem;padding:1.5rem;
-  border-radius:var(--radius-lg);border:2px dashed rgba(99,210,255,.3);
-  background:rgba(99,210,255,.04);transition:all var(--trans);
-  margin-top:1.5rem;
-}
-.resume-download:hover{border-color:var(--accent);background:rgba(99,210,255,.08);transform:translateY(-2px)}
-.resume-download h3{font-family:var(--font-head);font-size:1rem;font-weight:700}
-.resume-download p{font-size:.8rem;color:var(--text2)}
-.form-group{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.25rem}
-.form-label{font-size:.85rem;font-weight:600;color:var(--text2)}
-.form-input,.form-textarea{
-  padding:.75rem 1rem;border-radius:var(--radius);background:var(--bg4);
-  border:1px solid var(--border);color:var(--text1);font-family:var(--font-body);
-  font-size:.9rem;transition:all var(--trans);resize:none;
-}
-.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,210,255,.1)}
-.form-textarea{min-height:120px}
-.form-submit{
-  width:100%;padding:.85rem;border-radius:var(--radius);font-size:.95rem;font-weight:600;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));color:#07090F;
-  transition:all var(--trans);box-shadow:0 4px 16px rgba(99,210,255,.25);
-}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,210,255,.4)}
-
-/* ─────────────── FOOTER ─────────────── */
-footer{
-  padding:2rem;text-align:center;border-top:1px solid var(--border);
-  color:var(--text3);font-size:.82rem;
-}
-footer span{color:var(--accent)}
-
-/* ─────────────── SCROLL ANIMATIONS ─────────────── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:none}
-
-/* ─────────────── MOBILE NAV CLOSE ─────────────── */
-@media(max-width:768px){
-  .hero-stats{flex-wrap:wrap;gap:1.5rem}
-  .impact-num{font-size:.9rem}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nagul Shaik | Financial Analysis &amp; Data Science</title>
+  <meta name="description" content="Nagul Shaik is a financial analyst with a master's in data science. Explore his experience in FP&A, analytics and financial modeling, and his interest in applied AI.">
+  <meta name="theme-color" content="#f9faf9">
+  <meta property="og:title" content="Nagul Shaik | Financial Analysis &amp; Data Science">
+  <meta property="og:description" content="Financial analysis, a data science perspective, and a growing focus on applied AI. Experience, projects and ways to connect.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nagul1914.github.io/nagul-portfolio/">
+  <link rel="canonical" href="https://nagul1914.github.io/nagul-portfolio/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Libre+Caslon+Display&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="projects.css">
+  <link rel="stylesheet" href="design.css">
+  <script src="site.js?v=20260927" defer></script>
 </head>
 <body>
-
-<!-- NAV -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <div class="nav-logo">NMS<span style="color:var(--accent2)">.</span></div>
-    <div class="nav-links" id="navLinks">
-      <a class="nav-link active" href="#home" onclick="navigate('home')">Home</a>
-      <a class="nav-link" href="#about" onclick="navigate('about')">About</a>
-      <a class="nav-link" href="#skills" onclick="navigate('skills')">Skills</a>
-      <a class="nav-link" href="#da-projects" onclick="navigate('da-projects')">DA Projects</a>
-      <a class="nav-link" href="#ba-projects" onclick="navigate('ba-projects')">BA Projects</a>
-      <a class="nav-link" href="#ib-projects" onclick="navigate('ib-projects')">IB Projects</a>
-      <a class="nav-link" href="#contact" onclick="navigate('contact')">Contact</a>
-    </div>
-    <div class="nav-right">
-      <button class="theme-btn" onclick="toggleTheme()" title="Toggle theme" id="themeBtn">🌙</button>
-      <a class="nav-cta" href="#contact" onclick="navigate('contact')">Hire Me →</a>
-      <button class="hamburger" onclick="toggleMobileNav()" id="hamburger">
-        <span></span><span></span><span></span>
-      </button>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<header class="site-header">
+  <div class="site-nav frame">
+    <a class="wordmark" href="#home" aria-label="Nagul Shaik, home">NS<span aria-hidden="true">.</span></a>
+    <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+      <a href="#home" aria-current="page">Overview</a>
+      <a href="#about">Experience</a>
+      <a href="#skills">Expertise</a>
+      <details class="work-menu">
+        <summary>Projects <span aria-hidden="true">⌄</span></summary>
+        <div class="work-dropdown">
+          <a href="#da-projects">Data analysis <span>06</span></a>
+          <a href="#ba-projects">Business analysis <span>06</span></a>
+          <a href="#ib-projects">Investment banking <span>02</span></a>
+        </div>
+      </details>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="appearance-button" id="appearance-button" aria-label="Switch to dark appearance" title="Switch to dark appearance"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z"/></svg></button>
+      <a class="nav-resume" href="assets/Nagul_Shaik_Resume.pdf" target="_blank" rel="noopener">Résumé <span aria-hidden="true">↗</span></a>
+      <button class="menu-button" id="menu-button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     </div>
   </div>
-</nav>
-
-<!-- ═══════════════ HOME ═══════════════ -->
-<div class="page active" id="page-home">
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="hero-glow"></div>
-    <div class="hero-inner">
-      <div class="hero-badge">🟢 Open to new opportunities · Jersey City, NJ</div>
-      <h1 class="hero-name">Nagul<br/><span>Shaik</span></h1>
-      <p class="hero-title"><strong>Quantitative Analyst &amp; Data Scientist</strong> &middot; Financial Modeling &middot; Capital Markets &middot; Power &amp; Utilities IB</p>
-      <p class="hero-desc">Quantitative analyst specializing in financial modeling, DCF/WACC valuations, and capital markets advisory. Experienced in Power &amp; Utilities IB, M&amp;A transactions, and data-driven insights using Python, SQL, and BI tools.</p>
-      <div class="hero-pills"><span class="pill">Financial Modeling</span><span class="pill">DCF &middot; WACC</span><span class="pill">M&amp;A Advisory</span><span class="pill">Python &middot; SQL</span><span class="pill">Power BI &middot; Tableau</span><span class="pill">Capital IQ &middot; FactSet</span><span class="pill">Power &amp; Utilities</span></div>
-      <div class="hero-btns">
-        <a class="btn-primary" href="#da-projects" onclick="navigate('da-projects')">
-          <span>↓</span> View Projects
-        </a>
-        <a class="btn-secondary" href="#contact" onclick="navigate('contact')">
-          <span>✉</span> Get In Touch
-        </a>
-        <a class="btn-secondary" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank">
-          <span>in</span> LinkedIn
-        </a>
-        <a class="btn-secondary" href="https://github.com/Nagul1914" target="_blank">
-          <span>⌥</span> GitHub
-        </a>
+</header>
+<main id="main-content" tabindex="-1">
+<div class="page editorial active" id="page-home">
+  <section class="intro frame" aria-labelledby="intro-heading">
+    <div class="intro-top"><p class="eyebrow">Nagul Shaik <span class="small-divider">/</span> Financial Analyst</p><p class="location">New Jersey, USA</p></div>
+    <div class="intro-grid">
+      <div class="intro-copy">
+        <h1 id="intro-heading">Finance, with a<br><em>data science</em><br>perspective.</h1>
+        <p class="intro-description">I turn financial data into forecasts, reporting, and decisions people can use. My work connects FP&amp;A with SQL, Python, and business intelligence.</p>
+        <div class="action-row"><a class="solid-button" href="#da-projects">Explore my work <span aria-hidden="true">↗</span></a><a class="text-link" href="assets/Nagul_Shaik_Resume.pdf" target="_blank" rel="noopener">View résumé <span aria-hidden="true">↗</span></a></div>
       </div>
-      <div class="hero-stats">
-        <div>
-          <div class="hero-stat-num"><span>3</span>+</div>
-          <div class="hero-stat-label">Years Experience</div>
-        </div>
-        <div>
-          <div class="hero-stat-num"><span>10</span></div>
-          <div class="hero-stat-label">Case Studies</div>
-        </div>
-        <div>
-          <div class="hero-stat-num"><span>5</span>+</div>
-          <div class="hero-stat-label">Core Tools</div>
-        </div>
-        <div>
-          <div class="hero-stat-num"><span>2</span></div>
-          <div class="hero-stat-label">Certifications</div>
-        </div>
-      </div>
+      <aside class="profile-note" aria-label="Professional snapshot">
+        <div class="note-top"><span class="eyebrow">At a glance</span><span class="note-index" aria-hidden="true">NS / 01</span></div>
+        <div class="note-item"><span class="meta-label">Current role</span><h2>Financial Analyst</h2><p>Tokyo Electron (TEL)</p><span class="note-detail">July 2026–present</span></div>
+        <div class="note-item"><span class="meta-label">Academic foundation</span><h2>M.S. Data Science</h2><p>Pace University, New York</p></div>
+        <div class="note-item focus-note"><span class="meta-label">Looking ahead</span><p>Applied AI for financial analysis and decision support.</p></div>
+        <a class="note-link" href="#about">The experience behind the work <span aria-hidden="true">↗</span></a>
+      </aside>
     </div>
+    <div class="career-line"><span class="eyebrow">Experience across</span><div><span>Tokyo Electron</span><span>JPMorgan Chase &amp; Co.</span><span>Epsilon</span><span>KPMG</span></div></div>
+  </section>
+  <section class="work-index frame" aria-labelledby="work-heading">
+    <div class="section-heading"><div><p class="eyebrow">01 / Portfolio</p><h2 id="work-heading">A closer look<br>at the work.</h2></div><p>Explore projects in data analysis, business analysis, and financial modeling.</p></div>
+    <div class="index-links">
+      <a class="index-row" href="#da-projects"><span class="index-number">01</span><div><h3>Data analysis</h3><p>Financial markets, predictive models, and business intelligence.</p></div><span class="index-count">06 projects</span><span class="index-arrow" aria-hidden="true">↗</span></a>
+      <a class="index-row" href="#ba-projects"><span class="index-number">02</span><div><h3>Business analysis</h3><p>Operational performance, commercial insights, and decisions.</p></div><span class="index-count">06 projects</span><span class="index-arrow" aria-hidden="true">↗</span></a>
+      <a class="index-row" href="#ib-projects"><span class="index-number">03</span><div><h3>Investment banking</h3><p>Financial models, valuation, and advisory presentations.</p></div><span class="index-count">02 projects</span><span class="index-arrow" aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+  <section class="perspective-section"><div class="frame perspective-grid"><div><p class="eyebrow">02 / Perspective</p><h2>Understand the business.<br><em>Then build the analysis.</em></h2></div><div><p>My background is in financial planning, reporting, and reconciliation. A master's in data science adds a technical perspective to that work.</p><p>I'm interested in applying AI to these same problems: making financial information easier to investigate, explain, and use.</p><a class="text-link" href="#skills">Explore my expertise <span aria-hidden="true">↗</span></a></div></div></section>
+  <section class="closing frame"><p class="eyebrow">Let's connect</p><h2>Good work starts<br>with a conversation.</h2><a class="solid-button" href="#contact">Get in touch <span aria-hidden="true">↗</span></a></section>
+</div>
+
+<div class="page editorial" id="page-about">
+  <section class="inner-page frame">
+    <div class="page-heading"><p class="eyebrow">Experience &amp; education</p><h1>A financial foundation.<br><em>An analytical mindset.</em></h1><p>I'm Nagul Meera Shaik, a financial analyst with experience in FP&amp;A, financial modeling, and management reporting. I work across finance systems and data tools to make reporting reliable and useful.</p></div>
+    <div class="experience-layout"><div class="side-heading"><p class="eyebrow">Professional experience</p><p>Financial services,<br>marketing, and technology.</p><a class="text-link" href="assets/Nagul_Shaik_Resume.pdf" target="_blank" rel="noopener">Full résumé <span aria-hidden="true">↗</span></a></div><div class="experience-list">
+      <article class="experience-entry"><div class="entry-meta"><span>Jul 2026–present</span><span>New York, USA</span></div><h2>Tokyo Electron <span>(TEL)</span></h2><h3>Financial Analyst</h3><p>Supporting FP&amp;A reporting and forecast preparation in Oracle Hyperion Planning during entity consolidation.</p><ul><li>Validate budget, actual, and forecast data using Excel reconciliation and source-to-target checks.</li><li>Coordinate headcount, payroll, and operating expense inputs with FP&amp;A and accounting teams.</li></ul><p class="entry-tools">Oracle EPM · Smart View · Excel · SQL · Power BI</p></article>
+      <article class="experience-entry"><div class="entry-meta"><span>Jan 2026–Jun 2026</span><span>New Jersey, USA</span></div><h2>JPMorgan Chase &amp; Co.</h2><h3>Financial Analyst</h3><p>Built forecasting models, consolidation workflows, and executive reporting across finance teams.</p><ul><li>Developed multi-scenario forecasts in Anaplan and rolling budgets in Oracle Hyperion Essbase.</li><li>Created Power BI reporting and automated data preparation from SAP sources with Alteryx.</li><li>Supported variance analysis, cash flow modeling, and liquidity stress testing.</li></ul><p class="entry-tools">Anaplan · Oracle Essbase · Power BI · Alteryx · SAP</p></article>
+      <article class="experience-entry"><div class="entry-meta"><span>Nov 2024–Jan 2026</span><span>New York, USA</span></div><h2>Epsilon</h2><h3>Financial Analyst</h3><p>Connected revenue reporting, financial models, and commercial data to support profitability decisions.</p><ul><li>Consolidated cost centers into a unified P&amp;L view and developed three-statement models.</li><li>Combined Salesforce pipeline data with Oracle actuals for revenue forecasting.</li><li>Built Tableau reporting for ROI and contribution margin analysis.</li></ul><p class="entry-tools">Hyperion · Oracle ERP · Salesforce · Tableau · Excel</p></article>
+      <article class="experience-entry"><div class="entry-meta"><span>Jul 2020–Aug 2022</span><span>India</span></div><h2>KPMG</h2><h3>Financial Analyst</h3><p>Supported financial consolidation, statutory reporting, and scenario analysis for multinational clients.</p><ul><li>Prepared audit-ready reporting packages under IFRS and GAAP.</li><li>Improved SAP-to-Hyperion data workflows and supported regulatory filings in Workiva.</li></ul><p class="entry-tools">SAP · Hyperion · Alteryx · Workiva · Bloomberg</p></article>
+    </div></div>
+    <div class="education-row"><p class="eyebrow">Education</p><div><h2>Master of Science, Data Science</h2><p>Pace University · New York, NY</p></div><span class="education-date">April 2024</span></div>
   </section>
 </div>
 
-<!-- ═══════════════ ABOUT ═══════════════ -->
-<div class="page" id="page-about">
-  <div class="section">
-    <div class="section-inner">
-      <div class="section-label">About Me</div>
-      <h2 class="section-title">Professional <span class="hi">Background</span></h2>
-      <div class="divider"></div>
-      <p class="section-sub">Quantitative analyst with <strong>2+ years of experience</strong> in financial modeling, DCF/WACC valuations, M&amp;A advisory, and capital markets. Specialized in the Power &amp; Utilities sector with deep expertise in FERC regulatory frameworks. Proficient in Capital IQ, FactSet, Bloomberg, Python, SQL, Power BI, and Tableau.</p>
-      <div class="about-grid">
-        <div class="about-card reveal">
-          <h3>&#x1F4BC; Data Scientist, Financial Analysis</h3>
-          <div class="tl-company">Centene Corporation &mdash; USA</div>
-          <div class="tl-date">Jan 2024 &ndash; Present</div>
-          <p>Built DCF and WACC models for Power &amp; Utilities M&amp;A transactions. Developed precedent transaction and comparable company analyses. Supported $2.1B acquisition pitch and credit/accretion-dilution modeling. Utilized Capital IQ, FactSet, and Bloomberg for deal sourcing and financial analysis.</p>
-          <div class="about-tags">
-            <span class="tag">DCF &amp; WACC</span>
-            <span class="tag">M&amp;A Advisory</span>
-            <span class="tag">Power &amp; Utilities</span>
-            <span class="tag">Capital IQ</span>
-            <span class="tag">FactSet</span>
-          </div>
-        </div>
-        <div class="about-card reveal">
-          <h3>&#x1F3E6; Analyst, Banking &amp; Capital Markets</h3>
-          <div class="tl-company">Genpact &mdash; Hyderabad, India</div>
-          <div class="tl-date">Aug 2021 &ndash; Jul 2022</div>
-          <p>Executed debt &amp; equity capital markets advisory and syndicated finance transactions. Built $750M capital markets pitch book for utility sector client. Performed credit analysis and capital structure optimization. Supported live deal execution and client deliverables.</p>
-          <div class="about-tags">
-            <span class="tag">Capital Markets</span>
-            <span class="tag">Debt &amp; Equity</span>
-            <span class="tag">Syndicated Finance</span>
-            <span class="tag">Credit Analysis</span>
-            <span class="tag">Bloomberg</span>
-          </div>
-        </div>
-        <div class="about-card reveal">
-          <h3>&#x1F393; M.S. Data Science</h3>
-          <div class="tl-company">Pace University &mdash; Seidenberg School of CSIS, New York</div>
-          <div class="tl-date">2022 &ndash; 2024</div>
-          <p>Graduate studies combining quantitative finance, machine learning, and data engineering. Applied statistical modeling and Python/SQL to financial datasets. Completed IB-focused projects in P&amp;U M&amp;A valuation and capital markets pitch book preparation.</p>
-          <div class="about-tags">
-            <span class="tag">Python</span>
-            <span class="tag">SQL</span>
-            <span class="tag">Machine Learning</span>
-            <span class="tag">Financial Modeling</span>
-          </div>
-        </div>
-        <div class="about-card reveal">
-          <h3>&#x1F3C5; Certifications</h3>
-          <div class="timeline">
-            <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><strong>Microsoft Power BI Data Analyst Associate</strong><div class="tl-date">Microsoft Certified</div></div></div>
-            <div class="tl-item"><div class="tl-dot"></div><div class="tl-content"><strong>Tableau Desktop Certified Professional</strong><div class="tl-date">Tableau Certified</div></div></div>
-          </div>
-        </div>
-      </div>
+<div class="page editorial" id="page-skills">
+  <section class="inner-page frame">
+    <div class="page-heading"><p class="eyebrow">Expertise</p><h1>Business context.<br><em>Technical capability.</em></h1><p>The methods and tools I use to understand performance, build reliable reporting, and support financial decisions.</p></div>
+    <div class="capability-grid">
+      <article class="capability"><span class="eyebrow">01 / Financial analysis</span><h2>Planning &amp; modeling</h2><p>Budgeting, forecasts, and scenario analysis that connect assumptions to financial outcomes.</p><ul><li>FP&amp;A and variance analysis</li><li>Three-statement and cash flow models</li><li>Scenario and sensitivity analysis</li><li>DCF and cost-benefit analysis</li><li>KPI development and management reporting</li></ul></article>
+      <article class="capability"><span class="eyebrow">02 / Data &amp; reporting</span><h2>Analysis &amp; automation</h2><p>Preparing, validating, and presenting data so that reporting can be trusted and repeated.</p><ul><li>SQL and relational data modeling</li><li>Python: Pandas and NumPy</li><li>Power BI and Tableau</li><li>Excel, Power Query, and VBA</li><li>Alteryx and ETL workflows</li></ul></article>
+      <article class="capability"><span class="eyebrow">03 / Finance systems</span><h2>Planning &amp; consolidation</h2><p>Working across enterprise systems, source data, and reporting outputs.</p><ul><li>Oracle Hyperion Planning and Smart View</li><li>Oracle Essbase and Financial Reporting</li><li>SAP ERP and Oracle ERP</li><li>Anaplan and OneStream</li><li>Workiva and Salesforce CRM analytics</li></ul></article>
+      <article class="capability"><span class="eyebrow">04 / Reporting discipline</span><h2>Quality &amp; communication</h2><p>Reconciling the detail and explaining what it means for the people making decisions.</p><ul><li>Source-to-target validation</li><li>Financial consolidation and audit support</li><li>GAAP, IFRS, and ASC 606</li><li>Executive reporting and financial disclosures</li><li>Cross-functional finance collaboration</li></ul></article>
     </div>
-  </div>
-</div>
-<div class="page" id="page-skills">
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-label">Technical Proficiency</div>
-      <h2 class="section-title">Skills & <span class="hi">Tools</span></h2>
-      <div class="divider"></div>
-      <p class="section-sub">A modern analytics stack built over 3+ years of real enterprise, healthcare, and financial environments.</p>
-
-      <div class="skills-grid">
-        <!-- Card 1: Data Querying -->
-        <div class="skill-card reveal">
-  <div class="skill-card-icon">&#x1F4CA;</div>
-  <h3>Financial Modeling &amp; Valuation</h3>
-  <p>DCF, WACC, comparable company analyses, precedent transactions, and accretion/dilution modeling for M&amp;A and capital markets advisory.</p>
-  <div class="skill-bars">
-    <div class="skill-row"><span>DCF &amp; WACC</span><div class="bar-wrap"><div class="bar-fill" data-pct="95"></div></div><span class="pct">95%</span></div>
-    <div class="skill-row"><span>Comparable Analyses</span><div class="bar-wrap"><div class="bar-fill" data-pct="92"></div></div><span class="pct">92%</span></div>
-    <div class="skill-row"><span>Precedent Transactions</span><div class="bar-wrap"><div class="bar-fill" data-pct="90"></div></div><span class="pct">90%</span></div>
-    <div class="skill-row"><span>Credit Analysis</span><div class="bar-wrap"><div class="bar-fill" data-pct="90"></div></div><span class="pct">90%</span></div>
-    <div class="skill-row"><span>Accretion / Dilution</span><div class="bar-wrap"><div class="bar-fill" data-pct="88"></div></div><span class="pct">88%</span></div>
-  </div>
-</div>
-<div class="skill-card reveal">
-  <div class="skill-card-icon">&#x1F3DB;</div>
-  <h3>Capital Markets &amp; Corporate Finance</h3>
-  <p>Debt &amp; equity capital markets, syndicated finance, capital structure advisory, M&amp;A pitch books, and Power &amp; Utilities sector expertise.</p>
-  <div class="skill-bars">
-    <div class="skill-row"><span>M&amp;A Advisory</span><div class="bar-wrap"><div class="bar-fill" data-pct="88"></div></div><span class="pct">88%</span></div>
-    <div class="skill-row"><span>Debt &amp; Equity Markets</span><div class="bar-wrap"><div class="bar-fill" data-pct="85"></div></div><span class="pct">85%</span></div>
-    <div class="skill-row"><span>Power &amp; Utilities</span><div class="bar-wrap"><div class="bar-fill" data-pct="90"></div></div><span class="pct">90%</span></div>
-    <div class="skill-row"><span>Capital IQ / FactSet / Bloomberg</span><div class="bar-wrap"><div class="bar-fill" data-pct="87"></div></div><span class="pct">87%</span></div>
-    <div class="skill-row"><span>Syndicated Finance</span><div class="bar-wrap"><div class="bar-fill" data-pct="83"></div></div><span class="pct">83%</span></div>
-  </div>
-</div>
-<div class="skill-card reveal">
-          <div class="skill-card-icon">🗄</div>
-          <h3>Data Querying & Engineering</h3>
-          <p>Advanced database manipulation for enterprise warehouses and analytical pipelines</p>
-          <div class="skill-bars">
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">SQL (CTEs · Window Fn · Joins)</span><span class="skill-pct">95%</span></div><div class="bar-track"><div class="bar-fill" data-pct="95"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Python · Pandas</span><span class="skill-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-pct="82"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">dbt (Data Build Tool)</span><span class="skill-pct">68%</span></div><div class="bar-track"><div class="bar-fill" data-pct="68"></div></div></div>
-          </div>
-        </div>
-
-        <!-- Card 2: BI & Visualization -->
-        <div class="skill-card reveal">
-          <div class="skill-card-icon" style="background:rgba(123,245,160,.1)">📊</div>
-          <h3>Business Intelligence & Visualization</h3>
-          <p>Dashboard development, KPI reporting, and executive-level data storytelling</p>
-          <div class="skill-bars">
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Power BI + DAX</span><span class="skill-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Tableau Desktop</span><span class="skill-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-pct="85"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Excel (Pivot · Lookups)</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div></div>
-          </div>
-        </div>
-
-        <!-- Card 3: Analytics -->
-        <div class="skill-card reveal">
-          <div class="skill-card-icon" style="background:rgba(255,123,123,.1)">📈</div>
-          <h3>Analytics & Statistical Modeling</h3>
-          <p>From KPI design to ML-powered forecasting and predictive insights</p>
-          <div class="skill-bars">
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">KPI Design & Performance Monitoring</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Trend & Variance Analysis</span><span class="skill-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Scikit-learn / ML Models</span><span class="skill-pct">72%</span></div><div class="bar-track"><div class="bar-fill" data-pct="72"></div></div></div>
-          </div>
-        </div>
-
-        <!-- Card 4: Domain -->
-        <div class="skill-card reveal">
-          <div class="skill-card-icon" style="background:rgba(255,209,102,.1)">🏥</div>
-          <h3>Domain & Business Knowledge</h3>
-          <p>Regulated reporting environments and cross-industry analytical expertise</p>
-          <div class="skill-bars">
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Healthcare Claims (Medicaid/Medicare)</span><span class="skill-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">HEDIS Reporting</span><span class="skill-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-pct="85"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Financial Market Analytics</span><span class="skill-pct">78%</span></div><div class="bar-track"><div class="bar-fill" data-pct="78"></div></div></div>
-          </div>
-        </div>
-
-        <!-- Card 5: Data Mgmt -->
-        <div class="skill-card reveal">
-          <div class="skill-card-icon" style="background:rgba(99,210,255,.1)">🔧</div>
-          <h3>Data Management & Quality</h3>
-          <p>End-to-end data reliability from ingestion to audit-ready reporting</p>
-          <div class="skill-bars">
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Data Cleaning & Transformation</span><span class="skill-pct">93%</span></div><div class="bar-track"><div class="bar-fill" data-pct="93"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Data Validation & Reconciliation</span><span class="skill-pct">91%</span></div><div class="bar-track"><div class="bar-fill" data-pct="91"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Reporting Automation (SQL+Python)</span><span class="skill-pct">86%</span></div><div class="bar-track"><div class="bar-fill" data-pct="86"></div></div></div>
-          </div>
-        </div>
-
-        <!-- Card 6: Soft -->
-        <div class="skill-card reveal">
-          <div class="skill-card-icon" style="background:rgba(123,245,160,.1)">🤝</div>
-          <h3>Collaboration & Business Acumen</h3>
-          <p>Translating business questions into data solutions and back again</p>
-          <div class="skill-bars">
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Stakeholder Communication</span><span class="skill-pct">92%</span></div><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Requirements Translation</span><span class="skill-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-pct="88"></div></div></div>
-            <div class="skill-row"><div class="skill-row-top"><span class="skill-name">Executive Reporting & Storytelling</span><span class="skill-pct">87%</span></div><div class="bar-track"><div class="bar-fill" data-pct="87"></div></div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Certifications -->
-      <div style="margin-top:3rem">
-        <div class="section-label" style="margin-bottom:1rem">Verified Credentials</div>
-        <div class="cert-grid reveal">
-          <div class="cert-item">
-            <div class="cert-ico">📊</div>
-            <div class="cert-info">
-              <h4>Microsoft Power BI</h4>
-              <p>Analyzing & Visualizing Data</p>
-            </div>
-          </div>
-          <div class="cert-item">
-            <div class="cert-ico">📉</div>
-            <div class="cert-info">
-              <h4>Tableau Desktop Professional</h4>
-              <p>Certified Professional Exam</p>
-            </div>
-          </div>
-          <div class="cert-item">
-            <div class="cert-ico">🎓</div>
-            <div class="cert-info">
-              <h4>M.S. Data Science</h4>
-              <p>Pace University · New York</p>
-            </div>
-          </div>
-          <div class="cert-item">
-            <div class="cert-ico">🐍</div>
-            <div class="cert-info">
-              <h4>Python · Pandas · scikit-learn</h4>
-              <p>Applied ML & Data Analysis</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <aside class="ai-direction"><div><p class="eyebrow">Developing focus</p><h2>Applied AI in finance.</h2></div><p>I'm building on my finance experience and data science education to explore AI-assisted analysis, forecasting, and decision support. My interest is in practical applications where the data and the reasoning can be checked.</p></aside>
+    <section class="credentials" aria-labelledby="credentials-title"><p class="eyebrow" id="credentials-title">Certifications</p><div><article><span>Microsoft</span><h3>Analyzing and Visualizing Data<br>with Microsoft Power BI</h3></article><article><span>Tableau (Salesforce)</span><h3>Tableau Desktop<br>Certified Professional</h3></article></div></section>
   </section>
 </div>
-
 <!-- ═══════════════ DA PROJECTS ═══════════════ -->
 <div class="page" id="page-da-projects">
   <section class="section">
@@ -1293,213 +707,15 @@ footer span{color:var(--accent)}
   </section>
 </div>
 
-<!-- ═══════════════ CONTACT ═══════════════ -->
-<div class="page" id="page-contact">
-  <section class="section">
-    <div class="section-inner">
-      <div class="section-label">Let's Connect</div>
-      <h2 class="section-title">Get In <span class="hi">Touch</span></h2>
-      <div class="divider"></div>
-      <p class="section-sub">Open to Data Analyst and Business Analyst roles in Finance, Healthcare, SaaS, Retail, and Logistics. Based in Jersey City, NJ — open to remote and hybrid.</p>
 
-      <div class="contact-grid">
-        <!-- Links -->
-        <div>
-          <div class="contact-card reveal">
-            <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem">Connect & Profiles</h3>
-            <div class="contact-links">
-              <a class="contact-link-item" href="mailto:nagul4768@gmail.com">
-                <div class="contact-link-icon">✉</div>
-                <div class="contact-link-info">
-                  <h4>Email</h4>
-                  <p>nagul4768@gmail.com</p>
-                </div>
-              </a>
-              <a class="contact-link-item" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank">
-                <div class="contact-link-icon" style="background:rgba(10,102,194,.15)">in</div>
-                <div class="contact-link-info">
-                  <h4>LinkedIn</h4>
-                  <p>linkedin.com/in/nagulshaik-dataanalyst</p>
-                </div>
-              </a>
-              <a class="contact-link-item" href="https://github.com/Nagul1914" target="_blank">
-                <div class="contact-link-icon">⌥</div>
-                <div class="contact-link-info">
-                  <h4>GitHub</h4>
-                  <p>github.com/Nagul1914</p>
-                </div>
-              </a>
-              <div class="contact-link-item" style="cursor:default">
-                <div class="contact-link-icon">📍</div>
-                <div class="contact-link-info">
-                  <h4>Location</h4>
-                  <p>Jersey City, NJ · Open to Remote/Hybrid</p>
-                </div>
-              </div>
-            </div>
-            <a class="resume-download" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank">
-              <div style="font-size:2rem">📄</div>
-              <div>
-                <h3>Download Resume</h3>
-                <p>Nagul Shaik · Data & Business Analyst · 2024</p>
-              </div>
-              <div style="margin-left:auto;color:var(--accent);font-size:1.3rem">↓</div>
-            </a>
-          </div>
-        </div>
-
-        <!-- Form -->
-        <div>
-          <div class="contact-card reveal">
-            <h3 style="font-family:var(--font-head);font-size:1.1rem;font-weight:700;margin-bottom:1.25rem">Send a Message</h3>
-            <div class="form-group">
-              <label class="form-label">Your Name</label>
-              <input class="form-input" type="text" placeholder="Jane Smith, Hiring Manager"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Email Address</label>
-              <input class="form-input" type="email" placeholder="jane@company.com"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Company & Role</label>
-              <input class="form-input" type="text" placeholder="Acme Corp · Senior Data Analyst"/>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Message</label>
-              <textarea class="form-textarea" placeholder="Hi Nagul, we'd love to discuss a Data Analyst role at..."></textarea>
-            </div>
-            <button class="form-submit" onclick="handleFormSubmit(this)">Send Message →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Availability Banner -->
-      <div class="reveal" style="margin-top:2.5rem;padding:1.5rem 2rem;border-radius:var(--radius-lg);border:1px solid rgba(123,245,160,.2);background:rgba(123,245,160,.04);display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap">
-        <div style="width:12px;height:12px;border-radius:50%;background:var(--accent2);box-shadow:0 0 12px var(--accent2);flex-shrink:0;animation:pulse 2s infinite"></div>
-        <div>
-          <div style="font-weight:700;font-size:1rem">Actively seeking new opportunities</div>
-          <div style="color:var(--text2);font-size:.875rem">Available for Data Analyst · Business Analyst · Analytics Engineer roles · Mid-level to Senior</div>
-        </div>
-        <a class="btn-primary" href="https://www.linkedin.com/in/nagulshaik-dataanalyst" target="_blank" style="margin-left:auto">View LinkedIn →</a>
-      </div>
-    </div>
+<div class="page editorial" id="page-contact">
+  <section class="inner-page frame contact-page">
+    <div class="page-heading"><p class="eyebrow">Contact</p><h1>Let's put good<br><em>questions to work.</em></h1><p>For conversations about financial analysis, data, and applied AI opportunities, email me or connect on LinkedIn.</p></div>
+    <div class="connect-grid"><div class="contact-primary"><span class="eyebrow">Email</span><a class="email-address" href="mailto:nagulmeerashaik26@outlook.com">nagulmeerashaik26@outlook.com <span aria-hidden="true">↗</span></a><p>Based in New Jersey, USA.</p><a class="solid-button" href="mailto:nagulmeerashaik26@outlook.com?subject=Portfolio%20enquiry">Write an email <span aria-hidden="true">↗</span></a></div><div class="contact-destinations"><a href="https://www.linkedin.com/in/nagulshaik-financeanalyst" target="_blank" rel="noopener"><div><h2>LinkedIn</h2><p>Professional profile</p></div><span aria-hidden="true">↗</span></a><a href="https://github.com/Nagul1914" target="_blank" rel="noopener"><div><h2>GitHub</h2><p>Code and projects</p></div><span aria-hidden="true">↗</span></a><a href="assets/Nagul_Shaik_Resume.pdf" download><div><h2>Download résumé</h2><p>Financial analysis &amp; data science · PDF</p></div><span aria-hidden="true">↓</span></a></div></div>
   </section>
 </div>
-
-<!-- FOOTER (shown on all pages conceptually, actually bottom of each page) -->
-<footer id="site-footer" style="display:none">
-  <p>Designed & built with precision · <span>Nagul Shaik</span> · Jersey City, NJ · 2024</p>
-  <p style="margin-top:.35rem">Data Analyst · Business Analyst · M.S. Data Science, Pace University</p>
-</footer>
-
-<style>
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 12px var(--accent2)}50%{opacity:.6;box-shadow:0 0 20px var(--accent2)}}
-</style>
-
-<script>
-// ─────── ROUTER ───────
-const PAGES = ['home','about','skills','da-projects','ba-projects','ib-projects','contact'];
-let currentPage = 'home';
-
-function navigate(page, pushState = true) {
-  if (!PAGES.includes(page)) page = 'home';
-  
-  // Hide all pages
-  PAGES.forEach(p => {
-    const el = document.getElementById('page-' + p);
-    if (el) el.classList.remove('active');
-  });
-  
-  // Show target
-  const target = document.getElementById('page-' + page);
-  if (target) { target.classList.add('active'); window.scrollTo(0,0); }
-  
-  // Update nav
-  document.querySelectorAll('.nav-link').forEach(l => {
-    l.classList.remove('active');
-    if (l.getAttribute('href') === '#' + page) l.classList.add('active');
-  });
-  
-  // Update hash
-  if (pushState) history.pushState(null, '', '#' + page);
-  currentPage = page;
-  
-  // Show footer on all pages except home
-  const footer = document.getElementById('site-footer');
-  if(footer) footer.style.display = page !== 'home' ? 'block' : 'none';
-  
-  // Close mobile nav
-  document.getElementById('navLinks').classList.remove('open');
-  
-  // Trigger animations
-  setTimeout(triggerReveal, 100);
-  if (page === 'skills') setTimeout(animateBars, 300);
-}
-
-// Handle hash on load
-window.addEventListener('load', () => {
-  const hash = window.location.hash.replace('#','') || 'home';
-  navigate(hash, false);
-});
-window.addEventListener('popstate', () => {
-  const hash = window.location.hash.replace('#','') || 'home';
-  navigate(hash, false);
-});
-
-// ─────── THEME ───────
-let isDark = true;
-function toggleTheme() {
-  isDark = !isDark;
-  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
-}
-
-// ─────── MOBILE NAV ───────
-function toggleMobileNav() {
-  document.getElementById('navLinks').classList.toggle('open');
-}
-
-// ─────── EXPAND/COLLAPSE ───────
-function toggleExpand(id, btn) {
-  const el = document.getElementById(id);
-  const isOpen = el.classList.contains('open');
-  el.classList.toggle('open');
-  btn.textContent = isOpen ? '↓ Details' : '↑ Collapse';
-}
-
-// ─────── SCROLL REVEAL ───────
-function triggerReveal() {
-  document.querySelectorAll('.page.active .reveal').forEach((el, i) => {
-    setTimeout(() => { el.classList.add('visible'); }, i * 60);
-  });
-}
-
-// ─────── SKILL BARS ───────
-function animateBars() {
-  document.querySelectorAll('.page.active .bar-fill').forEach(bar => {
-    bar.style.width = bar.dataset.pct + '%';
-  });
-}
-
-// ─────── FORM ───────
-function handleFormSubmit(btn) {
-  btn.textContent = '✓ Message Sent! I\'ll respond within 24hrs';
-  btn.style.background = 'linear-gradient(135deg,var(--accent2),#2ECC71)';
-  setTimeout(() => {
-    btn.textContent = 'Send Message →';
-    btn.style.background = '';
-  }, 4000);
-}
-
-// ─────── NAVBAR SCROLL ───────
-window.addEventListener('scroll', () => {
-  const nav = document.getElementById('navbar');
-  if (window.scrollY > 20) nav.style.boxShadow = '0 4px 30px rgba(0,0,0,.3)';
-  else nav.style.boxShadow = '';
-});
-
-// Initial trigger
-setTimeout(triggerReveal, 200);
-</script>
+</main>
+<footer class="portfolio-footer"><div class="frame footer-inner"><a class="footer-name" href="#home">Nagul Shaik<span>.</span></a><p>Financial analysis. Data science. Applied curiosity.</p><div><a href="https://www.linkedin.com/in/nagulshaik-financeanalyst" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/Nagul1914" target="_blank" rel="noopener">GitHub</a><a href="mailto:nagulmeerashaik26@outlook.com">Email</a></div></div></footer>
+<noscript><div class="no-script">JavaScript is disabled. All portfolio sections are shown below the overview. You can contact Nagul at <a href="mailto:nagulmeerashaik26@outlook.com">nagulmeerashaik26@outlook.com</a>.</div><style>.page{display:block!important}.reveal{opacity:1!important;transform:none!important}.proj-expand{max-height:none!important}.page{padding-top:2rem}</style></noscript>
 </body>
 </html>
