@@ -1,4 +1,4 @@
-# Nagul Shaik — portfolio
+# Nagul S — portfolio
 
 Financial analysis, data science, and a developing focus on applied AI.
 
@@ -10,7 +10,7 @@ Financial analysis, data science, and a developing focus on applied AI.
 - `design.css`: the editorial layout and responsive profile pages.
 - `projects.css`: the original project styles, preserved from the previous version.
 - `site.js`: hash navigation, appearance, mobile menu, and project detail controls.
-- `assets/Nagul_Shaik_Resume.pdf`: the supplied résumé.
+- `assets/Nagul_S_Resume.pdf`: the supplied résumé.
 
 The portfolio is a static site with no build dependencies. GitHub Pages serves the repository root from `main`.
 

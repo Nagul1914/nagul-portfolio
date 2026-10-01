@@ -30,7 +30,7 @@ function renderRoute(focusContent = false) {
     else link.removeAttribute('aria-current');
   });
   document.querySelector('.work-menu').classList.toggle('is-current', page.endsWith('-projects'));
-  document.title = 'Nagul Shaik | ' + PAGE_TITLES[page];
+  document.title = 'Nagul S | ' + PAGE_TITLES[page];
   closeNavigation();
   document.querySelectorAll('.page.active .reveal').forEach(element => element.classList.add('visible'));
   if (focusContent) document.getElementById('main-content').focus({preventScroll:true});
